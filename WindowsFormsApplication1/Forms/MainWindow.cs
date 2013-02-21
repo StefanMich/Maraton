@@ -95,7 +95,17 @@ namespace Marathon
 
         private void seriesOverview1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (manager.Series.Count() > 0) // If the list is empty, no commands makes sense
+
+                    EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
+                    es.ShowDialog();
+                    SaveLoad.SaveManager(manager, "data.lawl");
+                    setToCurrent();
+                }
+            else if (e.KeyCode == Keys.R)
+            {
+                manager.CurrentSeries = manager.Series.Find(manager.RecentlyWatched);
+                setToCurrent();
+            }
             {
                 if (e.KeyCode == Keys.Left)
                     Previous();
@@ -142,6 +152,7 @@ namespace Marathon
 
         private void Play(Series series)
         {
+            manager.RecentlyWatched = series;
             Process P = new Process();
             Episode episode = series.Seasons.Peek().Episodes.Dequeue();
 

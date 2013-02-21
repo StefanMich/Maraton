@@ -33,8 +33,8 @@ namespace Marathon
 //TODO en måde at søge på i overview, jump? Search? 
 //TODO alfabetisk sortering i overview
 //TODO eventuelt forskellige sorteringer - alfabetisk, frekvens (frekvens kunne eventuelt være et træ der har rod i midten)
-//TODO genvej til senest sete serie
 //TODO Fix at der ikke altid er fokus til at bruge keyboard shortcuts
+
 
 //General
 //TODO sygt ikon - lille mand der løber

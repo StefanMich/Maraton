@@ -40,6 +40,17 @@ namespace Marathon
 
         private LinkedListNode<Series> currentSeries;
         private SeriesCollection series;
+        private Series recentlyWatched;
+
+        /// <summary>
+        /// Sets or gets the most recently watched series
+        /// </summary>
+        public Series RecentlyWatched
+        {
+            get { return recentlyWatched; }
+            set { recentlyWatched = value; }
+        }
+        
 
         /// <summary>
         /// Gets the <see cref="SeriesCollection"/> of the <see cref="SeriesManager"/>
@@ -66,6 +77,7 @@ namespace Marathon
         {
             this.series = (SeriesCollection)info.GetValue("Series", typeof(SeriesCollection));
             this.currentSeries = series.Find((Series)info.GetValue("CurrentSeries", typeof(Series)));
+            this.recentlyWatched = (Series)info.GetValue("RecentyWatched", typeof(Series));
         }
 
         /// <summary>
@@ -82,6 +94,7 @@ namespace Marathon
                 }
                 else return currentSeries;
             }
+            set { currentSeries = value; }
         }
 
         /// <summary>
@@ -304,6 +317,7 @@ namespace Marathon
             if (this.currentSeries != null)
                 info.AddValue("CurrentSeries", this.currentSeries.Value);
             info.AddValue("Series", this.series);
+            info.AddValue("RecentlyWatched", this.recentlyWatched);
         }
         /// <summary>
         /// Contains a collection of <see cref="Series"/>
