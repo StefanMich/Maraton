@@ -101,6 +101,11 @@ namespace Marathon
                 Next();
             else if (e.KeyCode == Keys.Enter)
                 Play(manager.CurrentSeries.Value);
+            else if (e.KeyCode == Keys.R)
+            {
+                manager.CurrentSeries = manager.Series.Find(manager.RecentlyWatched);
+                setToCurrent();
+            }
             else if (e.KeyCode == Keys.Space)
             {
                 EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
@@ -137,6 +142,7 @@ namespace Marathon
 
         private void Play(Series series)
         {
+            manager.RecentlyWatched = series;
             Process P = new Process();
             Episode episode = series.Seasons.Peek().Episodes.Dequeue();
 
@@ -172,11 +178,5 @@ namespace Marathon
             else manager = new SeriesManager();
             //config.OnLoad();
         }
-
-
-       
-
-
-        
     }
 }
