@@ -135,8 +135,6 @@ namespace Marathon
             }
         }
 
-        
-
         /// <summary>
         /// Adds the content of the path to the <see cref="Series"/> as a <see cref="Season"/>
         /// </summary>
@@ -190,18 +188,20 @@ namespace Marathon
             }
 
             series.Add(thisSeries);
-            if (currentSeries == null)
-                currentSeries = series.Find(thisSeries);
+            currentSeries = series.Find(thisSeries);
 
             SaveLoad.SaveManager(this, "data.lawl");
 
         }
 
+        /// <summary>
+        /// Removes the specified <see cref="Series"/> from the manager
+        /// </summary>
+        /// <param name="s"></param>
         public void RemoveSeries(Series s)
         {
             currentSeries = NextSeries;
             series.Remove(s);
-            
         }
 
         /// <summary>
@@ -254,8 +254,8 @@ namespace Marathon
             var searchResults = buffer.SearchTitle(title).Results;
             if (searchResults != null && searchResults.Count() != 0)
             {
-                var parsed = searchResults.Where(x=>x.Type == MediaType.TVSeries);
-                if (parsed.Count() > 1 )
+                var parsed = searchResults.Where(x => x.Type == MediaType.TVSeries);
+                if (parsed.Count() > 1)
                 {
                     NameChooser result = new NameChooser(parsed);
 
@@ -266,7 +266,7 @@ namespace Marathon
                     }
                     else page = null;
                 }
-                
+
                 else
                 {
                     page = buffer.ReadMain(parsed.First().Id);
@@ -301,7 +301,8 @@ namespace Marathon
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("CurrentSeries", this.currentSeries.Value);
+            if (this.currentSeries != null)
+                info.AddValue("CurrentSeries", this.currentSeries.Value);
             info.AddValue("Series", this.series);
         }
         /// <summary>

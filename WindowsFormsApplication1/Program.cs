@@ -34,16 +34,15 @@ namespace Marathon
 //TODO alfabetisk sortering i overview
 //TODO eventuelt forskellige sorteringer - alfabetisk, frekvens (frekvens kunne eventuelt være et træ der har rod i midten)
 //TODO genvej til senest sete serie
+//TODO Fix at der ikke altid er fokus til at bruge keyboard shortcuts
 
 //General
 //TODO sygt ikon - lille mand der løber
 
 //Editseries
-//TODO ved fjernelse af den sidste serie i EditSeries crasher skidtet da manageren er tom
-//TODO play i editseries
 //TODO Sortering af sæsoner i EditSeries
-//TODO EditSeries - Enter for play og delete for remove
-//TODO EditSeries - Add file
+//TODO Enter for play og delete for remove
 //TODO undo ved delete
 //TODO tilføj fil til sæson
+//TODO Bedre layout
 

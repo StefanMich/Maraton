@@ -95,20 +95,22 @@ namespace Marathon
 
         private void seriesOverview1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
-                Previous();
-            else if (e.KeyCode == Keys.Right)
-                Next();
-            else if (e.KeyCode == Keys.Enter)
-                Play(manager.CurrentSeries.Value);
-            else if (e.KeyCode == Keys.Space)
+            if (manager.Series.Count() > 0) // If the list is empty, no commands makes sense
             {
-                EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
-                es.ShowDialog();
-                SaveLoad.SaveManager(manager, "data.lawl");
-                setToCurrent();
+                if (e.KeyCode == Keys.Left)
+                    Previous();
+                else if (e.KeyCode == Keys.Right)
+                    Next();
+                else if (e.KeyCode == Keys.Enter)
+                    Play(manager.CurrentSeries.Value);
+                else if (e.KeyCode == Keys.Space)
+                {
+                    EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
+                    es.ShowDialog();
+                    SaveLoad.SaveManager(manager, "data.lawl");
+                    setToCurrent();
+                }
             }
-            
         }
 
         private void setText()
@@ -122,8 +124,8 @@ namespace Marathon
             
             if (fbdBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                manager.AddSeries(fbdBrowse.SelectedPath);
-                Previous();
+                 manager.AddSeries(fbdBrowse.SelectedPath);
+                
                 setToCurrent();
             }
             seriesOverview1.Select();
@@ -131,8 +133,11 @@ namespace Marathon
 
         private void setToCurrent()
         {
-            seriesOverview1.SetSeriesDisplayed(manager.CurrentSeries);
-            setText();
+            if (manager.Series.Count() > 0)
+            {
+                seriesOverview1.SetSeriesDisplayed(manager.CurrentSeries);
+                setText();
+            }
         }
 
         private void Play(Series series)
@@ -172,11 +177,5 @@ namespace Marathon
             else manager = new SeriesManager();
             //config.OnLoad();
         }
-
-
-       
-
-
-        
     }
 }
