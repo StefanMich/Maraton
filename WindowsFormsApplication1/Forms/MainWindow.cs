@@ -25,7 +25,7 @@ namespace Marathon
         public MainWindow()
         {
             InitializeComponent();
-            
+
 
 #if DEBUG
             
@@ -95,32 +95,25 @@ namespace Marathon
 
         private void seriesOverview1_KeyUp(object sender, KeyEventArgs e)
         {
-
-                    EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
-                    es.ShowDialog();
-                    SaveLoad.SaveManager(manager, "data.lawl");
-                    setToCurrent();
-                }
+            if (e.KeyCode == Keys.Left)
+                Previous();
+            else if (e.KeyCode == Keys.Right)
+                Next();
+            else if (e.KeyCode == Keys.Enter)
+                Play(manager.CurrentSeries.Value);
             else if (e.KeyCode == Keys.R)
             {
                 manager.CurrentSeries = manager.Series.Find(manager.RecentlyWatched);
                 setToCurrent();
             }
+            else if (e.KeyCode == Keys.Space)
             {
-                if (e.KeyCode == Keys.Left)
-                    Previous();
-                else if (e.KeyCode == Keys.Right)
-                    Next();
-                else if (e.KeyCode == Keys.Enter)
-                    Play(manager.CurrentSeries.Value);
-                else if (e.KeyCode == Keys.Space)
-                {
-                    EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
-                    es.ShowDialog();
-                    SaveLoad.SaveManager(manager, "data.lawl");
-                    setToCurrent();
-                }
+                EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
+                es.ShowDialog();
+                SaveLoad.SaveManager(manager, "data.lawl");
+                setToCurrent();
             }
+
         }
 
         private void setText()
@@ -131,11 +124,11 @@ namespace Marathon
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             pictureBox1.Focus();
-            
+
             if (fbdBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                 manager.AddSeries(fbdBrowse.SelectedPath);
-                
+                manager.AddSeries(fbdBrowse.SelectedPath);
+
                 setToCurrent();
             }
             seriesOverview1.Select();
@@ -159,7 +152,7 @@ namespace Marathon
 
             P.StartInfo.FileName = series.Seasons.Peek().Path + "\\" + episode.Path;
             P.Start();
-            
+
 
             if (series.Seasons.Peek().Episodes.Count() == 0)
                 series.Seasons.Dequeue();
