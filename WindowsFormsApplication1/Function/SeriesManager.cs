@@ -77,7 +77,7 @@ namespace Marathon
         {
             this.series = (SeriesCollection)info.GetValue("Series", typeof(SeriesCollection));
             this.currentSeries = series.Find((Series)info.GetValue("CurrentSeries", typeof(Series)));
-            this.recentlyWatched = (Series)info.GetValue("RecentyWatched", typeof(Series));
+            this.recentlyWatched = (Series)info.GetValue("RecentlyWatched", typeof(Series));
         }
 
         /// <summary>

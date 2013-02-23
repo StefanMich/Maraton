@@ -178,5 +178,26 @@ namespace Marathon
             else manager = new SeriesManager();
             //config.OnLoad();
         }
+
+        private void seriesOverview1_DragEnter(object sender, DragEventArgs e)
+        {
+            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void seriesOverview1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] Folder = (string[])e.Data.GetData(DataFormats.FileDrop,false);
+
+            manager.AddSeries(Folder[0]);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("gasdsad");
+        }
+
+        
     }
 }
