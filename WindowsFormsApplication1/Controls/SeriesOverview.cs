@@ -35,11 +35,8 @@ namespace Marathon
             setSizes();
             Controls.AddRange(new Control[] { p0, p1, p2, p3, p4 });
             DoubleBuffered = true;
+
         }
-
-  
-
-     
 
         /// <summary>
         /// Sets the Series to display on the <see cref="TitleControl"/>
@@ -95,7 +92,5 @@ namespace Marathon
             this.Invalidate();
             this.Focus();
         }
-
-        
     }
 }
