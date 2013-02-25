@@ -45,4 +45,3 @@ namespace Marathon
 //TODO undo ved delete
 //TODO tilføj fil til sæson
 //TODO Bedre layout
-
