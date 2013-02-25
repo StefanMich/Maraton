@@ -89,6 +89,7 @@
             // 
             // seriesOverview1
             // 
+            this.seriesOverview1.AllowDrop = true;
             this.seriesOverview1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.seriesOverview1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seriesOverview1.Location = new System.Drawing.Point(0, 0);
