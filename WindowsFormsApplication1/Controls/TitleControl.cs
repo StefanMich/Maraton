@@ -39,10 +39,10 @@ namespace Marathon
             lTitle.Text = title;
             lTitle.Location = new Point(this.Width / 2 - lTitle.Width / 2, lTitle.Location.Y);
 
-            lSeasons.Text = seasons + " seasons";
+            lSeasons.Text = seasons + " season" + (seasons > 1 ? "s" : "");
             lSeasons.Location = new Point(this.Width / 2 - lSeasons.Width / 2, lSeasons.Location.Y);
 
-            lEpisodes.Text = episodes + " episodes";
+            lEpisodes.Text = episodes + " episode" + (episodes > 1 ? "s" : "");
             lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
         }
 
