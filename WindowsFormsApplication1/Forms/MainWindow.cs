@@ -149,14 +149,12 @@ namespace Marathon
             P.StartInfo.FileName = series.Play();
             P.Start();
             
-            if (series.Seasons.Peek().Episodes.Count() == 0)
-                series.Seasons.Dequeue();
+            
 
             if (series.Seasons.Count() == 0)
             {
                 Next();
                 manager.Series.Remove(series);
-
             }
 
             setToCurrent();
