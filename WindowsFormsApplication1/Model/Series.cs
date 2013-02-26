@@ -143,7 +143,7 @@ namespace Marathon
             /// Enqueues a <see cref="Season"/> in the <see cref="SeasonsCollection"/>
             /// </summary>
             /// <param name="season">The <see cref="Season"/> to enqueue</param>
-            public void Enqueue(Season season)
+            public void Add(Season season)
             {
                 seasons.Add(season);
             }
@@ -158,7 +158,7 @@ namespace Marathon
             }
 
             /// <summary>
-            /// Dequeues the <see cref="Season"/> in the beginning of the queue
+            /// "Dequeues" the <see cref="Season"/> in the beginning of the list
             /// </summary>
             /// <returns>The dequeued <see cref="Season"/></returns>
             public void Dequeue()

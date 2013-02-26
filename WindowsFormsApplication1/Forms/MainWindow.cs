@@ -144,7 +144,7 @@ namespace Marathon
         {
             manager.RecentlyWatched = series;
             Process P = new Process();
-            Episode episode = series.Seasons.Peek().Episodes.Dequeue();
+            Episode episode = series.Seasons.Peek().Episodes.Remove();
 
 
             P.StartInfo.FileName = series.Seasons.Peek().Path + "\\" + episode.Path;

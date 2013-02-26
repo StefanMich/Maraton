@@ -132,7 +132,7 @@ namespace Marathon
         /// <returns></returns>
         public void AddEpisodetoSeason(Season season, string filename)
         {
-            season.Episodes.Enqueue(filename.returnEpisode());
+            season.Episodes.Add(filename.returnEpisode());
         }
         /// <summary>
         /// Appends a list of files to the specified <see cref="Season"/>
@@ -144,7 +144,7 @@ namespace Marathon
 
             for (int i = 0; i < Files.Count; i++)
             {
-                season.Episodes.Enqueue(Files[i].returnEpisode());
+                season.Episodes.Add(Files[i].returnEpisode());
             }
         }
 
@@ -166,7 +166,7 @@ namespace Marathon
             removeOtherFileTypes(seasonEpisodes, exclude);
 
             addEpisodesToSeason(thisSeason, seasonEpisodes);
-            series.Seasons.Enqueue(thisSeason);
+            series.Seasons.Add(thisSeason);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Marathon
                 removeOtherFileTypes(seasonEpisodes, exclude);
 
                 addEpisodesToSeason(thisSeason, seasonEpisodes);
-                thisSeries.Seasons.Enqueue(thisSeason);
+                thisSeries.Seasons.Add(thisSeason);
 
             }
 
