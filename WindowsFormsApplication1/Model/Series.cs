@@ -111,6 +111,10 @@ namespace Marathon
             return count;
         }
 
+        /// <summary>
+        /// Returns the path to the next episode to be played
+        /// </summary>
+        /// <returns>The path to the next episode in the <see cref="Series"/></returns>
         public string Play()
         {
             Episode episode = Seasons.Peek().Episodes.Remove();
