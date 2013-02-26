@@ -11,9 +11,7 @@ namespace Marathon
 {
     public partial class TitleControl : UserControl
     {
-        private string title;
-        private int seasons;
-        private int episodes;
+        private Series series;
 
         /// <summary>
         /// Instantiates a <see cref="TitleControl"/> with a default text
@@ -21,30 +19,11 @@ namespace Marathon
         public TitleControl()
         {
             InitializeComponent();
-            this.title = "Add series with the button on the left";
+            this.series = new Series("Add series with the button on the left", null);
         }
 
-        /// <summary>
-        /// Sets the text of the <see cref="TitleControl"/> to the specified <paramref name="title"/>, <paramref name="seasons"/> and <paramref name="episodes"/>
-        /// </summary>
-        /// <param name="title">The title to set the <see cref="TitleControl"/> to</param>
-        /// <param name="seasons">The numver of <see cref="Season"/>s to display on the <see cref="TitleControl"/></param>
-        /// <param name="episodes">The number of <see cref="Stufkan.IO.Episode"/>s to display on the <see cref="TitleControl"/></param>
-        public void SetText(string title, int seasons, int episodes)
-        {
-            this.title = title;
-            this.seasons = seasons;
-            this.episodes = episodes;
-
-            lTitle.Text = title;
-            lTitle.Location = new Point(this.Width / 2 - lTitle.Width / 2, lTitle.Location.Y);
-
-            lSeasons.Text = seasons + " season" + (seasons > 1 ? "s" : "");
-            lSeasons.Location = new Point(this.Width / 2 - lSeasons.Width / 2, lSeasons.Location.Y);
-
-            lEpisodes.Text = episodes + " episode" + (episodes > 1 ? "s" : "");
-            lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
-        }
+       
+        
 
         /// <summary>
         /// Sets the content of the <see cref="TitleControl"/> to the content of the <see cref="Series"/>
@@ -52,7 +31,16 @@ namespace Marathon
         /// <param name="series"></param>
         public void SetText(Series series)
         {
-            SetText(series.Name, series.NumberOfSeasons(), series.NumberOfEpisodes());
+            this.
+
+            lTitle.Text = series.Name;
+            lTitle.Location = new Point(this.Width / 2 - lTitle.Width / 2, lTitle.Location.Y);
+
+            lSeasons.Text = series.NumberOfSeasons() + " season" + (series.NumberOfSeasons() > 1 ? "s" : "");
+            lSeasons.Location = new Point(this.Width / 2 - lSeasons.Width / 2, lSeasons.Location.Y);
+
+            lEpisodes.Text = series.NumberOfEpisodes() + " episode" + (series.NumberOfEpisodes() > 1 ? "s" : "");
+            lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
         }
 
         /// <summary>
@@ -63,7 +51,7 @@ namespace Marathon
         {
             base.OnResize(e);
 
-            SetText(title, seasons, episodes);
+            SetText(series);
             this.Invalidate();
         }
 
