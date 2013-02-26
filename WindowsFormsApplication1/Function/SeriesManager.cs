@@ -389,7 +389,7 @@ namespace Marathon
             {
                 return Series.Last();
             }
-
+            
             /// <summary>
             /// Finds the first node that contains the specified <see cref="Series"/>
             /// </summary>
