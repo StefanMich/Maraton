@@ -115,6 +115,10 @@ namespace Marathon
         {
             Episode episode = Seasons.Peek().Episodes.Remove();
             plays++;
+
+            if (Seasons.Peek().Episodes.Count() == 0)
+                Seasons.Dequeue();
+
             return Seasons.Peek().Path + "\\" + episode.Path;
         }
 
