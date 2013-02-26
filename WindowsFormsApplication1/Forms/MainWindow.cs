@@ -143,14 +143,11 @@ namespace Marathon
         private void Play(Series series)
         {
             manager.RecentlyWatched = series;
-            Process P = new Process();
-            
 
+            Process P = new Process();
             P.StartInfo.FileName = series.Play();
             P.Start();
             
-            
-
             if (series.Seasons.Count() == 0)
             {
                 Next();
@@ -160,11 +157,6 @@ namespace Marathon
             setToCurrent();
             SaveLoad.SaveManager(manager, "data.lawl");
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveLoad.SaveManager(manager, "data.lawl");
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -188,12 +180,5 @@ namespace Marathon
 
             manager.AddSeries(Folder[0]);
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            MessageBox.Show("gasdsad");
-        }
-
-        
     }
 }
