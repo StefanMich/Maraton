@@ -123,7 +123,6 @@ namespace Marathon
             }
         }
 
-
         /// <summary>
         /// Adds a file to the specified <see cref="Season"/>
         /// </summary>
@@ -208,6 +207,10 @@ namespace Marathon
 
         }
 
+        /// <summary>
+        /// Removes the specified <see cref="Series"/> from the list of <see cref="Series"/>
+        /// </summary>
+        /// <param name="s">The <see cref="Series"/> to remove</param>
         public void RemoveSeries(Series s)
         {
             currentSeries = NextSeries;
