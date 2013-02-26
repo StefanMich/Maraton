@@ -14,6 +14,7 @@ namespace Marathon
     public class Episode : ISerializable
     {
         private string path;
+        private string title;
 
         /// <summary>
         /// Gets the full path to the episode
@@ -22,8 +23,6 @@ namespace Marathon
         {
             get { return path; }
         }
-
-        private string title;
 
         /// <summary>
         /// Gets the title of the episode

@@ -51,7 +51,6 @@ namespace Marathon
             set { recentlyWatched = value; }
         }
         
-
         /// <summary>
         /// Gets the <see cref="SeriesCollection"/> of the <see cref="SeriesManager"/>
         /// </summary>

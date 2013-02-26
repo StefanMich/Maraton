@@ -19,6 +19,16 @@ namespace Marathon
         private string name;
         private Image picture;
 
+        private int plays;
+
+        /// <summary>
+        /// The number of times the Series has been played (Used for frequency sorting)
+        /// </summary>
+        public int Plays
+        {
+            get { return plays; }
+        }
+
         /// <summary>
         /// The the <see cref="SeasonsCollection"/> of the <see cref="Series"/>
         /// </summary>
@@ -74,7 +84,7 @@ namespace Marathon
                 Properties.Resources.no_photo.Save(name);
                 this.picture = Properties.Resources.no_photo;
             }
-            
+
             this.seasons = (SeasonsCollection)info.GetValue("Seasons", typeof(SeasonsCollection));
         }
 
@@ -99,6 +109,13 @@ namespace Marathon
                 count += s.Episodes.Count();
             }
             return count;
+        }
+
+        public string Play()
+        {
+            Episode episode = Seasons.Peek().Episodes.Remove();
+            plays++;
+            return Seasons.Peek().Path + "\\" + episode.Path;
         }
 
         /// <summary>
@@ -182,7 +199,7 @@ namespace Marathon
             public int Count()
             {
                 return seasons.Count();
-                
+
             }
 
             /// <summary>
