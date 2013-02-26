@@ -31,16 +31,18 @@ namespace Marathon
         /// <param name="series"></param>
         public void SetText(Series series)
         {
-            this.
+            if (series != null)
+            {
 
-            lTitle.Text = series.Name;
-            lTitle.Location = new Point(this.Width / 2 - lTitle.Width / 2, lTitle.Location.Y);
+                lTitle.Text = series.Name;
+                lTitle.Location = new Point(this.Width / 2 - lTitle.Width / 2, lTitle.Location.Y);
 
-            lSeasons.Text = series.NumberOfSeasons() + " season" + (series.NumberOfSeasons() > 1 ? "s" : "");
-            lSeasons.Location = new Point(this.Width / 2 - lSeasons.Width / 2, lSeasons.Location.Y);
+                lSeasons.Text = series.NumberOfSeasons() + " season" + (series.NumberOfSeasons() > 1 ? "s" : "");
+                lSeasons.Location = new Point(this.Width / 2 - lSeasons.Width / 2, lSeasons.Location.Y);
 
-            lEpisodes.Text = series.NumberOfEpisodes() + " episode" + (series.NumberOfEpisodes() > 1 ? "s" : "");
-            lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
+                lEpisodes.Text = series.NumberOfEpisodes() + " episode" + (series.NumberOfEpisodes() > 1 ? "s" : "");
+                lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
+            }
         }
 
         /// <summary>
