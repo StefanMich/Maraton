@@ -145,11 +145,9 @@ namespace Marathon
             Process P = new Process();
             Episode episode = series.Seasons.Peek().Episodes.Dequeue();
 
-
             P.StartInfo.FileName = series.Seasons.Peek().Path + "\\" + episode.Path;
             P.Start();
             
-
             if (series.Seasons.Peek().Episodes.Count() == 0)
                 series.Seasons.Dequeue();
 
@@ -157,12 +155,10 @@ namespace Marathon
             {
                 Next();
                 manager.Series.Remove(series);
-
             }
 
             setToCurrent();
             SaveLoad.SaveManager(manager, "data.lawl");
-
         }
 
         private void button1_Click(object sender, EventArgs e)
