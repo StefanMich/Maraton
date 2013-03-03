@@ -96,6 +96,8 @@
             this.seriesOverview1.Name = "seriesOverview1";
             this.seriesOverview1.Size = new System.Drawing.Size(814, 331);
             this.seriesOverview1.TabIndex = 0;
+            this.seriesOverview1.DragDrop += new System.Windows.Forms.DragEventHandler(this.seriesOverview1_DragDrop);
+            this.seriesOverview1.DragEnter += new System.Windows.Forms.DragEventHandler(this.seriesOverview1_DragEnter);
             this.seriesOverview1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.seriesOverview1_KeyUp);
             // 
             // MainWindow
