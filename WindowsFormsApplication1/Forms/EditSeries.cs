@@ -26,12 +26,14 @@ namespace Marathon
         public EditSeries()
         {
             InitializeComponent();
+            tvEditor.NodeMouseClick += (sender, args) => tvEditor.SelectedNode = args.Node;
         }
 
         /// <summary>
         /// Instantiates a <see cref="EditSeries"/> with the content of the specified <see cref="Series"/>
         /// </summary>
         /// <param name="series">The <see cref="Series"/> to display</param>
+        /// <param name="manager">The manager containing the <see cref="Series"/></param>
         public EditSeries(Series series, SeriesManager manager): this()
         {
             this.series = series;
@@ -117,6 +119,42 @@ namespace Marathon
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+        }
+
+        private void addFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                if (s is Season)
+                {
+                    OpenFileDialog fd = new OpenFileDialog();
+                    if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        s.Episodes.Enqueue(fd.FileName.returnEpisode());
+                    tvEditor.SelectedNode.Nodes.Add(fd.FileName);
+                }
+                else
+                    MessageBox.Show("You can only add files to seasons");
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                if (s is Season)
+                {
+                    series.Seasons.Remove(s);
+                }
+                else 
+                {
+                    s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Parent.Text).FirstOrDefault();
+                     Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                    s.Episodes.Remove(ep);
+                }
+                tvEditor.SelectedNode.Remove();
+            }
         }
     }
 }
