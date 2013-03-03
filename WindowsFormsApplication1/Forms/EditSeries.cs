@@ -26,14 +26,16 @@ namespace Marathon
         public EditSeries()
         {
             InitializeComponent();
+            tvEditor.NodeMouseClick += (sender, args) => tvEditor.SelectedNode = args.Node;
         }
 
         /// <summary>
         /// Instantiates a <see cref="EditSeries"/> with the content of the specified <see cref="Series"/>
         /// </summary>
         /// <param name="series">The <see cref="Series"/> to display</param>
-        /// <param name="manager">The <see cref="SeriesManager"/> owning the <see cref="Series"/> to be edited</param>
-        public EditSeries(Series series, SeriesManager manager): this()
+        /// <param name="manager">The manager containing the <see cref="Series"/></param>
+        public EditSeries(Series series, SeriesManager manager)
+            : this()
         {
             this.series = series;
             this.manager = manager;
@@ -49,7 +51,7 @@ namespace Marathon
             tvEditor.Nodes.Clear();
             foreach (Season s in series.Seasons)
             {
-                
+
                 TreeNode t = tvEditor.Nodes.Add(s.Title);
                 foreach (Episode e in s.Episodes)
                 {
@@ -65,7 +67,7 @@ namespace Marathon
             {
                 series.Picture.Dispose();
                 pbPoster.Image.Dispose();
-                File.Replace(fbd.FileName, series.Name, fbd.FileName+".bak");
+                File.Replace(fbd.FileName, series.Name, fbd.FileName + ".bak");
                 series.Picture = Bitmap.FromFile(series.Name);
                 pbPoster.Image = series.Picture;
                 //TODO crasher nogle gange (ved skift af billede flere gange?)
@@ -76,9 +78,9 @@ namespace Marathon
         private void btnDelete_Click(object sender, EventArgs e)
         {
             TreeNode n = tvEditor.SelectedNode;
-            if (n!= null)
+            if (n != null)
             {
-                Season s = series.Seasons.Where(x=>x.Title == n.Text).FirstOrDefault();
+                Season s = series.Seasons.Where(x => x.Title == n.Text).FirstOrDefault();
                 if (s != null)
                 {
                     series.Seasons.Remove(s);
@@ -87,14 +89,14 @@ namespace Marathon
 
                 foreach (Season season in series.Seasons)
                 {
-                    Episode ep= season.Episodes.Where(x => x.Title == n.Text).FirstOrDefault();
+                    Episode ep = season.Episodes.Where(x => x.Title == n.Text).FirstOrDefault();
                     if (ep != null)
                     {
                         season.Episodes.Remove(ep);
                         n.Parent.Nodes.Remove(n);
-                        }
+                    }
                 }
-            
+
             }
         }
 
@@ -110,7 +112,7 @@ namespace Marathon
             {
                 manager.AddSeasonToSeries(series, fbd.SelectedPath);
                 populateTreeView(series);
-                
+
             }
         }
 
@@ -118,6 +120,73 @@ namespace Marathon
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+        }
+
+        private void addFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                if (s is Season)
+                {
+                    OpenFileDialog fd = new OpenFileDialog();
+                    if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        s.Episodes.Enqueue(fd.FileName.returnEpisode());
+                    tvEditor.SelectedNode.Nodes.Add(fd.FileName);
+                }
+                else
+                    MessageBox.Show("You can only add files to seasons");
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            deleteSelectedNode();
+        }
+
+        private void deleteSelectedNode()
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                if (s is Season)
+                {
+                    series.Seasons.Remove(s);
+                }
+                else
+                {
+                    s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Parent.Text).FirstOrDefault();
+                    Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                    s.Episodes.Remove(ep);
+                }
+                tvEditor.SelectedNode.Remove();
+            }
+        }
+
+        private void tvEditor_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                if (e.KeyCode == Keys.Delete)
+                    deleteSelectedNode();
+
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                    if (s != null)
+                    {
+                        manager.Play(s, s.Episodes.Dequeue());
+                        tvEditor.SelectedNode.Nodes[0].Remove();
+                    }
+                    else
+                    {
+                        s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Parent.Text).FirstOrDefault();
+                        Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                        manager.Play(s, ep);
+                        tvEditor.SelectedNode.Remove();
+                    }
+                }
+            }
         }
     }
 }

@@ -144,24 +144,6 @@ namespace Marathon
             }
         }
 
-        private void Play(Series series)
-        {
-            manager.RecentlyWatched = series;
-
-            Process P = new Process();
-            P.StartInfo.FileName = series.Play();
-            P.Start();
-            if (series.Seasons.Count() == 0)
-            {
-                Next();
-                manager.Series.Remove(series);
-            }
-
-            setToCurrent();
-            SaveLoad.SaveManager(manager, "data.lawl");
-
-        }
-
         private void GUI_Load(object sender, EventArgs e)
         {
             if ((manager = SaveLoad.OnLoad()) != null)

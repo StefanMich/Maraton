@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 
 namespace Marathon
@@ -144,6 +145,47 @@ namespace Marathon
         }
 
         /// <summary>
+        /// Plays the next <see cref="Episode"/> in the <see cref="Series"/> currently set as <see cref="CurrentSeries"/>
+        /// </summary>
+        public void PlayCurrent()
+        {
+            Process P = new Process();
+            Episode episode = currentSeries.Value.Seasons.Peek().Episodes.Dequeue();
+
+            P.StartInfo.FileName = /*CurrentSeries.Value.Seasons.Peek().Path + "\\" +*/ episode.Path;
+            P.Start();
+
+            if (CurrentSeries.Value.Seasons.Peek().Episodes.Count() == 0)
+                CurrentSeries.Value.Seasons.Dequeue();
+
+            if (CurrentSeries.Value.Seasons.Count() == 0)
+            {
+                currentSeries = NextSeries;
+                series.Remove(CurrentSeries.Value);
+            }
+
+            SaveLoad.SaveManager(this, "data.lawl");
+        }
+
+        /// <summary>
+        /// Plays the specified <see cref="Episode"/> contained in the specified <see cref="Season"/>
+        /// </summary>
+        /// <param name="s">The <see cref="Season"/> containing the <see cref="Episode"/> about to be played</param>
+        /// <param name="e">The <see cref="Episode"/> to play</param>
+        public void Play(Season s, Episode e)
+        {
+            Process P = new Process();
+            P.StartInfo.FileName = /*CurrentSeries.Value.Seasons.Peek().Path + "\\" + */e.Path;
+            P.Start();
+
+            if (s.Episodes.Count() == 0)
+                s.Parent.Seasons.Remove(s);
+
+            if (s.Parent.Seasons.Count() == 0)
+                series.Remove(s.Parent);
+        }
+
+        /// <summary>
         /// Adds a file to the specified <see cref="Season"/>
         /// </summary>
         /// <param name="season">The <see cref="Season"/> to add the file to </param>
@@ -272,7 +314,7 @@ namespace Marathon
         private void GetFiles(List<string> files, string path)
         {
             files.AddRange(Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly));
-            Stufkan.IO.Filename.stripPath(files);
+            //Stufkan.IO.Filename.stripPath(files);
 
         }
 
