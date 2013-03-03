@@ -174,6 +174,7 @@
             this.tvEditor.Name = "tvEditor";
             this.tvEditor.Size = new System.Drawing.Size(310, 218);
             this.tvEditor.TabIndex = 0;
+            this.tvEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tvEditor_KeyUp);
             // 
             // btnAddSeason
             // 
@@ -211,7 +212,7 @@
             this.addFileToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(116, 48);
             // 
             // addFileToolStripMenuItem
             // 

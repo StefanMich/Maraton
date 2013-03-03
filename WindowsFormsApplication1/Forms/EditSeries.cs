@@ -34,7 +34,8 @@ namespace Marathon
         /// </summary>
         /// <param name="series">The <see cref="Series"/> to display</param>
         /// <param name="manager">The manager containing the <see cref="Series"/></param>
-        public EditSeries(Series series, SeriesManager manager): this()
+        public EditSeries(Series series, SeriesManager manager)
+            : this()
         {
             this.series = series;
             this.manager = manager;
@@ -50,7 +51,7 @@ namespace Marathon
             tvEditor.Nodes.Clear();
             foreach (Season s in series.Seasons)
             {
-                
+
                 TreeNode t = tvEditor.Nodes.Add(s.Title);
                 foreach (Episode e in s.Episodes)
                 {
@@ -66,7 +67,7 @@ namespace Marathon
             {
                 series.Picture.Dispose();
                 pbPoster.Image.Dispose();
-                File.Replace(fbd.FileName, series.Name, fbd.FileName+".bak");
+                File.Replace(fbd.FileName, series.Name, fbd.FileName + ".bak");
                 series.Picture = Bitmap.FromFile(series.Name);
                 pbPoster.Image = series.Picture;
                 //TODO crasher nogle gange (ved skift af billede flere gange?)
@@ -77,9 +78,9 @@ namespace Marathon
         private void btnDelete_Click(object sender, EventArgs e)
         {
             TreeNode n = tvEditor.SelectedNode;
-            if (n!= null)
+            if (n != null)
             {
-                Season s = series.Seasons.Where(x=>x.Title == n.Text).FirstOrDefault();
+                Season s = series.Seasons.Where(x => x.Title == n.Text).FirstOrDefault();
                 if (s != null)
                 {
                     series.Seasons.Remove(s);
@@ -88,14 +89,14 @@ namespace Marathon
 
                 foreach (Season season in series.Seasons)
                 {
-                    Episode ep= season.Episodes.Where(x => x.Title == n.Text).FirstOrDefault();
+                    Episode ep = season.Episodes.Where(x => x.Title == n.Text).FirstOrDefault();
                     if (ep != null)
                     {
                         season.Episodes.Remove(ep);
                         n.Parent.Nodes.Remove(n);
-                        }
+                    }
                 }
-            
+
             }
         }
 
@@ -111,7 +112,7 @@ namespace Marathon
             {
                 manager.AddSeasonToSeries(series, fbd.SelectedPath);
                 populateTreeView(series);
-                
+
             }
         }
 
@@ -140,6 +141,11 @@ namespace Marathon
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            deleteSelectedNode();
+        }
+
+        private void deleteSelectedNode()
+        {
             if (tvEditor.SelectedNode != null)
             {
                 Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
@@ -147,13 +153,26 @@ namespace Marathon
                 {
                     series.Seasons.Remove(s);
                 }
-                else 
+                else
                 {
                     s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Parent.Text).FirstOrDefault();
-                     Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                    Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
                     s.Episodes.Remove(ep);
                 }
                 tvEditor.SelectedNode.Remove();
+            }
+        }
+
+        private void tvEditor_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (tvEditor.SelectedNode != null)
+            {
+                if (e.KeyCode == Keys.Delete)
+                    deleteSelectedNode();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            { 
+                
             }
         }
     }
