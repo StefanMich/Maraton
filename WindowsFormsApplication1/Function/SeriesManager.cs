@@ -51,7 +51,6 @@ namespace Marathon
             set { recentlyWatched = value; }
         }
         
-
         /// <summary>
         /// Gets the <see cref="SeriesCollection"/> of the <see cref="SeriesManager"/>
         /// </summary>
@@ -94,7 +93,28 @@ namespace Marathon
                 }
                 else return currentSeries;
             }
-            set { currentSeries = value; }
+            set { currentSeries = value; OnCurrentSeriesChanged(EventArgs.Empty); }
+        }
+
+        /// <summary>
+        /// Delegate method for the CurrentSeriesChanged event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void CurrentSeriesChangedHandler(object sender, EventArgs e);
+
+        /// <summary>
+        /// When the current series is changed.
+        /// </summary>
+        public event CurrentSeriesChangedHandler CurrentSeriesChanged;
+        /// <summary>
+        /// Firing the CurrentSeriesChanged event properly
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnCurrentSeriesChanged(EventArgs e)
+        {
+            if (CurrentSeriesChanged != null)
+                CurrentSeriesChanged(this, e);
         }
 
         /// <summary>
@@ -123,7 +143,6 @@ namespace Marathon
             }
         }
 
-
         /// <summary>
         /// Adds a file to the specified <see cref="Season"/>
         /// </summary>
@@ -132,7 +151,7 @@ namespace Marathon
         /// <returns></returns>
         public void AddEpisodetoSeason(Season season, string filename)
         {
-            season.Episodes.Enqueue(filename.returnEpisode());
+            season.Episodes.Add(filename.returnEpisode());
         }
         /// <summary>
         /// Appends a list of files to the specified <see cref="Season"/>
@@ -144,7 +163,7 @@ namespace Marathon
 
             for (int i = 0; i < Files.Count; i++)
             {
-                season.Episodes.Enqueue(Files[i].returnEpisode());
+                season.Episodes.Add(Files[i].returnEpisode());
             }
         }
 
@@ -166,20 +185,20 @@ namespace Marathon
             removeOtherFileTypes(seasonEpisodes, exclude);
 
             addEpisodesToSeason(thisSeason, seasonEpisodes);
-            series.Seasons.Enqueue(thisSeason);
+            series.Seasons.Add(thisSeason);
         }
 
         /// <summary>
         /// Adds the path to the SeriesManager as a <see cref="Series"/>
         /// </summary>
         /// <param name="path"></param>
-        public void AddSeries(string path)
+        public LinkedListNode<Series> AddSeries(string path)
         {
             List<string> Seasons = new List<string>();
             string Name = path.getFilename();
             if (!File.Exists(Name))
                 if ((Name = getPicture(Name)) == string.Empty)
-                    return;
+                    return null; //this is possibly a bad solution. This happens when the users aborts the search for a poster from the series
 
             Series thisSeries = new Series(Name, Bitmap.FromFile(Name));
 
@@ -196,7 +215,7 @@ namespace Marathon
                 removeOtherFileTypes(seasonEpisodes, exclude);
 
                 addEpisodesToSeason(thisSeason, seasonEpisodes);
-                thisSeries.Seasons.Enqueue(thisSeason);
+                thisSeries.Seasons.Add(thisSeason);
 
             }
 
@@ -205,12 +224,14 @@ namespace Marathon
 
             SaveLoad.SaveManager(this, "data.lawl");
 
+            return series.Find(thisSeries);
+
         }
 
         /// <summary>
-        /// Removes the specified <see cref="Series"/> from the manager
+        /// Removes the specified <see cref="Series"/> from the list of <see cref="Series"/>
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">The <see cref="Series"/> to remove</param>
         public void RemoveSeries(Series s)
         {
             currentSeries = NextSeries;
@@ -267,7 +288,7 @@ namespace Marathon
             var searchResults = buffer.SearchTitle(title).Results;
             if (searchResults != null && searchResults.Count() != 0)
             {
-                var parsed = searchResults.Where(x => x.Type == MediaType.TVSeries);
+                var parsed = searchResults.Where(x=>x.Type == MediaType.TVSeries);
                 if (parsed.Count() > 1)
                 {
                     NameChooser result = new NameChooser(parsed);
@@ -280,9 +301,16 @@ namespace Marathon
                     else page = null;
                 }
 
-                else
+                else if(parsed.Count() == 1)
                 {
                     page = buffer.ReadMain(parsed.First().Id);
+                }
+                else
+                {
+                    EditSearch edit = new EditSearch(title);
+                    if (edit.ShowDialog() == DialogResult.OK)
+                        return getPicture(edit.EditedTitle);
+                    else return string.Empty;
                 }
 
 
@@ -293,15 +321,6 @@ namespace Marathon
                 }
                 else Properties.Resources.no_photo.Save(title);
                 Cursor.Current = Cursors.Default;
-            }
-
-            else
-            {
-                EditSearch edit = new EditSearch(title);
-                if (edit.ShowDialog() == DialogResult.OK)
-                    return getPicture(edit.EditedTitle);
-                else return string.Empty;
-
             }
             return title;
 
@@ -390,7 +409,7 @@ namespace Marathon
             {
                 return Series.Last();
             }
-
+            
             /// <summary>
             /// Finds the first node that contains the specified <see cref="Series"/>
             /// </summary>

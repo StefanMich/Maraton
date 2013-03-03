@@ -19,6 +19,16 @@ namespace Marathon
         private string name;
         private Image picture;
 
+        private int plays;
+
+        /// <summary>
+        /// The number of times the Series has been played (Used for frequency sorting)
+        /// </summary>
+        public int Plays
+        {
+            get { return plays; }
+        }
+
         /// <summary>
         /// The the <see cref="SeasonsCollection"/> of the <see cref="Series"/>
         /// </summary>
@@ -74,7 +84,7 @@ namespace Marathon
                 Properties.Resources.no_photo.Save(name);
                 this.picture = Properties.Resources.no_photo;
             }
-            
+
             this.seasons = (SeasonsCollection)info.GetValue("Seasons", typeof(SeasonsCollection));
         }
 
@@ -99,6 +109,21 @@ namespace Marathon
                 count += s.Episodes.Count();
             }
             return count;
+        }
+
+        /// <summary>
+        /// Returns the path to the next episode to be played
+        /// </summary>
+        /// <returns>The path to the next episode in the <see cref="Series"/></returns>
+        public string Play()
+        {
+            Episode episode = Seasons.Peek().Episodes.Remove();
+            plays++;
+
+            if (Seasons.Peek().Episodes.Count() == 0)
+                Seasons.Dequeue();
+
+            return Seasons.Peek().Path + "\\" + episode.Path;
         }
 
         /// <summary>
@@ -143,7 +168,7 @@ namespace Marathon
             /// Enqueues a <see cref="Season"/> in the <see cref="SeasonsCollection"/>
             /// </summary>
             /// <param name="season">The <see cref="Season"/> to enqueue</param>
-            public void Enqueue(Season season)
+            public void Add(Season season)
             {
                 seasons.Add(season);
             }
@@ -158,7 +183,7 @@ namespace Marathon
             }
 
             /// <summary>
-            /// Dequeues the <see cref="Season"/> in the beginning of the queue
+            /// "Dequeues" the <see cref="Season"/> in the beginning of the list
             /// </summary>
             /// <returns>The dequeued <see cref="Season"/></returns>
             public void Dequeue()
@@ -182,7 +207,7 @@ namespace Marathon
             public int Count()
             {
                 return seasons.Count();
-                
+
             }
 
             /// <summary>

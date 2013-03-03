@@ -29,7 +29,6 @@ namespace Marathon
 // SeriesOverview
 //TODO drag and drop
 //TODO variabelt antal serier der vises
-//TODO pænere buffer ved skift af serie
 //TODO en måde at søge på i overview, jump? Search? 
 //TODO alfabetisk sortering i overview
 //TODO eventuelt forskellige sorteringer - alfabetisk, frekvens (frekvens kunne eventuelt være et træ der har rod i midten)

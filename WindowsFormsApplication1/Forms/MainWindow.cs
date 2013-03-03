@@ -75,13 +75,17 @@ namespace Marathon
 #endif
         }
 
+        void manager_CurrentSeriesChanged(object sender, EventArgs e)
+        {
+            setToCurrent();
+        }
+
         /// <summary>
         /// Rotates the visual representation of the series queue, one to the right
         /// </summary>
         public void Next()
         {
-            seriesOverview1.SetSeriesDisplayed(manager.NextSeries);
-            setText();
+            manager.CurrentSeries = manager.NextSeries;
         }
 
         /// <summary>
@@ -89,8 +93,7 @@ namespace Marathon
         /// </summary>
         public void Previous()
         {
-            seriesOverview1.SetSeriesDisplayed(manager.PreviousSeries);
-            setText();
+            manager.CurrentSeries = manager.PreviousSeries;
         }
 
         private void seriesOverview1_KeyUp(object sender, KeyEventArgs e)
@@ -121,15 +124,13 @@ namespace Marathon
             titleControl1.SetText(manager.CurrentSeries.Value);
         }
 
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void AddSeries_MouseClick(object sender, MouseEventArgs e)
         {
             pictureBox1.Focus();
 
             if (fbdBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                manager.AddSeries(fbdBrowse.SelectedPath);
-
-                setToCurrent();
+                manager.CurrentSeries = manager.AddSeries(fbdBrowse.SelectedPath);
             }
             seriesOverview1.Select();
         }
@@ -146,32 +147,19 @@ namespace Marathon
         private void Play(Series series)
         {
             manager.RecentlyWatched = series;
+
             Process P = new Process();
-            Episode episode = series.Seasons.Peek().Episodes.Dequeue();
-
-
-            P.StartInfo.FileName = series.Seasons.Peek().Path + "\\" + episode.Path;
+            P.StartInfo.FileName = series.Play();
             P.Start();
-
-
-            if (series.Seasons.Peek().Episodes.Count() == 0)
-                series.Seasons.Dequeue();
-
             if (series.Seasons.Count() == 0)
             {
                 Next();
                 manager.Series.Remove(series);
-
             }
 
             setToCurrent();
             SaveLoad.SaveManager(manager, "data.lawl");
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveLoad.SaveManager(manager, "data.lawl");
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -180,6 +168,21 @@ namespace Marathon
                 setToCurrent();
             else manager = new SeriesManager();
             //config.OnLoad();
+            manager.CurrentSeriesChanged += new SeriesManager.CurrentSeriesChangedHandler(manager_CurrentSeriesChanged);
+        }
+
+        private void seriesOverview1_DragEnter(object sender, DragEventArgs e)
+        {
+            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void seriesOverview1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] Folder = (string[])e.Data.GetData(DataFormats.FileDrop,false);
+
+            manager.AddSeries(Folder[0]);
         }
     }
 }

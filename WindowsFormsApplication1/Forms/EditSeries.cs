@@ -32,6 +32,7 @@ namespace Marathon
         /// Instantiates a <see cref="EditSeries"/> with the content of the specified <see cref="Series"/>
         /// </summary>
         /// <param name="series">The <see cref="Series"/> to display</param>
+        /// <param name="manager">The <see cref="SeriesManager"/> owning the <see cref="Series"/> to be edited</param>
         public EditSeries(Series series, SeriesManager manager): this()
         {
             this.series = series;

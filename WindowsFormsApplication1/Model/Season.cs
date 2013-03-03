@@ -90,7 +90,7 @@ namespace Marathon
 
             foreach (var file in files)
             {
-                episodes.Enqueue(file.returnEpisode());
+                episodes.Add(file.returnEpisode());
             }
         }
 
@@ -137,7 +137,7 @@ namespace Marathon
             /// Enqueues the specified <paramref name="episode"/> in the queue
             /// </summary>
             /// <param name="episode">The <see cref="Stufkan.IO.Episode"/> to enqueue</param>
-            public void Enqueue(Episode episode)
+            public void Add(Episode episode)
             {
                 episodes.Add(episode);
             }
@@ -146,7 +146,7 @@ namespace Marathon
             /// Dequeues the <see cref="Episode"/> in the beginning of the queue
             /// </summary>
             /// <returns>The dequeued <see cref="Episode"/></returns>
-            public Episode Dequeue()
+            public Episode Remove()
             {
                 Episode e = episodes[0];
                 episodes.RemoveAt(0);

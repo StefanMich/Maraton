@@ -75,7 +75,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(33, 34);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddSeries_MouseClick);
             // 
             // titleControl1
             // 
@@ -89,6 +89,7 @@
             // 
             // seriesOverview1
             // 
+            this.seriesOverview1.AllowDrop = true;
             this.seriesOverview1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.seriesOverview1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seriesOverview1.Location = new System.Drawing.Point(0, 0);
