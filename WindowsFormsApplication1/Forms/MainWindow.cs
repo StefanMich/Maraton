@@ -102,7 +102,7 @@ namespace Marathon
                 else if (e.KeyCode == Keys.Right)
                     Next();
                 else if (e.KeyCode == Keys.Enter)
-                    Play(manager.CurrentSeries.Value);
+                    manager.PlayCurrent();
                 else if (e.KeyCode == Keys.Space)
                 {
                     EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
@@ -138,27 +138,6 @@ namespace Marathon
                 seriesOverview1.SetSeriesDisplayed(manager.CurrentSeries);
                 setText();
             }
-        }
-
-        private void Play(Series series)
-        {
-            Process P = new Process();
-            Episode episode = series.Seasons.Peek().Episodes.Dequeue();
-
-            P.StartInfo.FileName = series.Seasons.Peek().Path + "\\" + episode.Path;
-            P.Start();
-            
-            if (series.Seasons.Peek().Episodes.Count() == 0)
-                series.Seasons.Dequeue();
-
-            if (series.Seasons.Count() == 0)
-            {
-                Next();
-                manager.Series.Remove(series);
-            }
-
-            setToCurrent();
-            SaveLoad.SaveManager(manager, "data.lawl");
         }
 
         private void button1_Click(object sender, EventArgs e)

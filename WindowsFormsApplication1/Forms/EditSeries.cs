@@ -169,10 +169,23 @@ namespace Marathon
             {
                 if (e.KeyCode == Keys.Delete)
                     deleteSelectedNode();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            { 
-                
+
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                    if (s != null)
+                    {
+                        manager.Play(s, s.Episodes.Dequeue());
+                        tvEditor.SelectedNode.Nodes[0].Remove();
+                    }
+                    else
+                    {
+                        s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Parent.Text).FirstOrDefault();
+                        Episode ep = s.Episodes.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
+                        manager.Play(s, ep);
+                        tvEditor.SelectedNode.Remove();
+                    }
+                }
             }
         }
     }
