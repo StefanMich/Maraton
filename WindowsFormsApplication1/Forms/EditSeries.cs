@@ -113,6 +113,10 @@ namespace Marathon
             }
         }
 
-        //TODO ændr rækkefølge på sæsoner
+        private void EditSeries_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
     }
 }

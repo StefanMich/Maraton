@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tcTitle = new Marathon.TitleControl();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.pbPoster = new System.Windows.Forms.PictureBox();
@@ -38,7 +39,6 @@
             this.btnAddSeason = new System.Windows.Forms.Button();
             this.btnDeleteSeries = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.tcTitle = new Marathon.TitleControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,6 +75,14 @@
             this.splitContainer1.Size = new System.Drawing.Size(507, 333);
             this.splitContainer1.SplitterDistance = 77;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // tcTitle
+            // 
+            this.tcTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcTitle.Location = new System.Drawing.Point(0, 0);
+            this.tcTitle.Name = "tcTitle";
+            this.tcTitle.Size = new System.Drawing.Size(507, 77);
+            this.tcTitle.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -191,14 +199,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // tcTitle
-            // 
-            this.tcTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcTitle.Location = new System.Drawing.Point(0, 0);
-            this.tcTitle.Name = "tcTitle";
-            this.tcTitle.Size = new System.Drawing.Size(507, 77);
-            this.tcTitle.TabIndex = 0;
-            // 
             // EditSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +207,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "EditSeries";
             this.Text = "Edit Series";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditSeries_KeyUp);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
