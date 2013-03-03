@@ -47,6 +47,7 @@ namespace Marathon
         /// <param name="series">The <see cref="Series"/> to display</param>
         public void SetSeriesDisplayed(LinkedListNode<Series> series)
         {
+            
             if (series != null)
             {
                 p0.setSeries(series.PreviousOrLast().PreviousOrLast().Value);

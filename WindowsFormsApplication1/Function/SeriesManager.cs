@@ -93,7 +93,28 @@ namespace Marathon
                 }
                 else return currentSeries;
             }
-            set { currentSeries = value; }
+            set { currentSeries = value; OnCurrentSeriesChanged(EventArgs.Empty); }
+        }
+
+        /// <summary>
+        /// Delegate method for the CurrentSeriesChanged event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void CurrentSeriesChangedHandler(object sender, EventArgs e);
+
+        /// <summary>
+        /// When the current series is changed.
+        /// </summary>
+        public event CurrentSeriesChangedHandler CurrentSeriesChanged;
+        /// <summary>
+        /// Firing the CurrentSeriesChanged event properly
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnCurrentSeriesChanged(EventArgs e)
+        {
+            if (CurrentSeriesChanged != null)
+                CurrentSeriesChanged(this, e);
         }
 
         /// <summary>
@@ -171,13 +192,13 @@ namespace Marathon
         /// Adds the path to the SeriesManager as a <see cref="Series"/>
         /// </summary>
         /// <param name="path"></param>
-        public void AddSeries(string path)
+        public LinkedListNode<Series> AddSeries(string path)
         {
             List<string> Seasons = new List<string>();
             string Name = path.getFilename();
             if (!File.Exists(Name))
                 if ((Name = getPicture(Name)) == string.Empty)
-                    return;
+                    return null; //this is possibly a bad solution. This happens when the users aborts the search for a poster from the series
 
             Series thisSeries = new Series(Name, Bitmap.FromFile(Name));
 
@@ -203,6 +224,8 @@ namespace Marathon
                 currentSeries = series.Find(thisSeries);
 
             SaveLoad.SaveManager(this, "data.lawl");
+
+            return series.Find(thisSeries);
 
         }
 
