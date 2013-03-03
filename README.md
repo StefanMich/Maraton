@@ -1,4 +1,4 @@
 Maraton
 =======
 
-Program for keeping track on your progress in watching a TV-series
+Program for keeping track on your progress in watching several TV-series at once
