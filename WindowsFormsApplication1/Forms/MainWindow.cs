@@ -103,7 +103,7 @@ namespace Marathon
             else if (e.KeyCode == Keys.Right)
                 Next();
             else if (e.KeyCode == Keys.Enter)
-                Play(manager.CurrentSeries.Value);
+                manager.PlayCurrent();
             else if (e.KeyCode == Keys.R)
             {
                 manager.CurrentSeries = manager.Series.Find(manager.RecentlyWatched);

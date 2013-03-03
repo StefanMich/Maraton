@@ -131,7 +131,7 @@ namespace Marathon
                 {
                     OpenFileDialog fd = new OpenFileDialog();
                     if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        s.Episodes.Enqueue(fd.FileName.returnEpisode());
+                        s.Episodes.Add(fd.FileName.returnEpisode());
                     tvEditor.SelectedNode.Nodes.Add(fd.FileName);
                 }
                 else
@@ -175,7 +175,7 @@ namespace Marathon
                     Season s = series.Seasons.Where(x => x.Title == tvEditor.SelectedNode.Text).FirstOrDefault();
                     if (s != null)
                     {
-                        manager.Play(s, s.Episodes.Dequeue());
+                        manager.Play(s, s.Episodes.Remove());
                         tvEditor.SelectedNode.Nodes[0].Remove();
                     }
                     else

@@ -150,7 +150,7 @@ namespace Marathon
         public void PlayCurrent()
         {
             Process P = new Process();
-            Episode episode = currentSeries.Value.Seasons.Peek().Episodes.Dequeue();
+            Episode episode = currentSeries.Value.Seasons.Peek().Episodes.Remove();
 
             P.StartInfo.FileName = /*CurrentSeries.Value.Seasons.Peek().Path + "\\" +*/ episode.Path;
             P.Start();
