@@ -291,7 +291,7 @@ namespace Marathon
             if (searchResults != null && searchResults.Count() != 0)
             {
                 var parsed = searchResults.Where(x=>x.Type == MediaType.TVSeries);
-                if (parsed.Count() > 1 )
+                if (parsed.Count() > 1)
                 {
                     NameChooser result = new NameChooser(parsed);
 
@@ -303,9 +303,16 @@ namespace Marathon
                     else page = null;
                 }
                 
-                else
+                else if(parsed.Count() == 1)
                 {
                     page = buffer.ReadMain(parsed.First().Id);
+                }
+                else
+                {
+                    EditSearch edit = new EditSearch(title);
+                    if (edit.ShowDialog() == DialogResult.OK)
+                        return getPicture(edit.EditedTitle);
+                    else return string.Empty;
                 }
 
 
@@ -316,15 +323,6 @@ namespace Marathon
                 }
                 else Properties.Resources.no_photo.Save(title);
                 Cursor.Current = Cursors.Default;
-            }
-
-            else
-            {
-                EditSearch edit = new EditSearch(title);
-                if (edit.ShowDialog() == DialogResult.OK)
-                    return getPicture(edit.EditedTitle);
-                else return string.Empty;
-
             }
             return title;
 
