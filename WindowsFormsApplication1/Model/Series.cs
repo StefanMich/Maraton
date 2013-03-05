@@ -77,8 +77,8 @@ namespace Marathon
             //this.picture = (Image)info.GetValue("Picture", typeof(Image));
 
             this.name = (string)info.GetValue("Name", typeof(string));
-            if (File.Exists(name))
-                this.picture = Bitmap.FromFile(name);
+            if (File.Exists(SeriesManager.PosterPath + name))
+                this.picture = Bitmap.FromFile(SeriesManager.PosterPath + name);
             else
             {
                 Properties.Resources.no_photo.Save(name);

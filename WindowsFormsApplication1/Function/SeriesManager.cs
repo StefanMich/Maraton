@@ -37,6 +37,10 @@ namespace Marathon
     [Serializable()]
     public class SeriesManager : ISerializable
     {
+        /// <summary>
+        /// The PosterPath
+        /// </summary>
+        public static string PosterPath = @"Posters\";
         static List<string> exclude = new List<string>() { "srt", "db", "nfo" };
 
         private LinkedListNode<Series> currentSeries;
@@ -238,11 +242,11 @@ namespace Marathon
         {
             List<string> Seasons = new List<string>();
             string Name = path.getFilename();
-            if (!File.Exists(Name))
+            if (!File.Exists(SeriesManager.PosterPath + Name))
                 if ((Name = getPicture(Name)) == string.Empty)
                     return null; //this is possibly a bad solution. This happens when the users aborts the search for a poster from the series
 
-            Series thisSeries = new Series(Name, Bitmap.FromFile(Name));
+            Series thisSeries = new Series(Name, Bitmap.FromFile(SeriesManager.PosterPath +  Name));
 
             //find subfolders in path
             Seasons.AddRange(Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly));
@@ -355,13 +359,15 @@ namespace Marathon
                     else return string.Empty;
                 }
 
+                if (!Directory.Exists("Posters"))
+                    Directory.CreateDirectory("Posters");
 
                 if (page != null && page.PosterURL.Succes != false)
                 {
                     WebClient web = new WebClient();
-                    web.DownloadFile(page.PosterURL.Data.Address, title);
+                    web.DownloadFile(page.PosterURL.Data.Address,SeriesManager.PosterPath +  title);
                 }
-                else Properties.Resources.no_photo.Save(title);
+                else Properties.Resources.no_photo.Save(SeriesManager.PosterPath + title);
                 Cursor.Current = Cursors.Default;
             }
             return title;
