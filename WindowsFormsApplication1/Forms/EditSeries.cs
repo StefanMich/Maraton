@@ -188,5 +188,28 @@ namespace Marathon
                 }
             }
         }
+
+        private void tvEditor_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+
+        private void tvEditor_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void tvEditor_DragDrop(object sender, DragEventArgs e)
+        {
+            TreeNode newNode;
+
+            if(e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
+            {
+                Point p = ((TreeView)sender).PointToClient(new Point(e.X,e.Y));
+                TreeNode destinationNode = ((TreeView)sender).GetNodeAt(p);
+                newNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
+                //if(destinationNode.TreeView != newNode.TreeView)
+            }
+        }
     }
 }
