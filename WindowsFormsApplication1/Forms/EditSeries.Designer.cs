@@ -168,6 +168,7 @@
             // 
             // tvEditor
             // 
+            this.tvEditor.AllowDrop = true;
             this.tvEditor.ContextMenuStrip = this.contextMenuStrip1;
             this.tvEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvEditor.Location = new System.Drawing.Point(0, 0);
