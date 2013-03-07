@@ -209,6 +209,14 @@ namespace Marathon
                 TreeNode destinationNode = ((TreeView)sender).GetNodeAt(p);
                 newNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
                 //if(destinationNode.TreeView != newNode.TreeView)
+                
+                
+                int indexDestination = ((TreeView)sender).Nodes.IndexOf(destinationNode);
+                int indexNewNode = ((TreeView)sender).Nodes.IndexOf(newNode);
+                ((TreeView)sender).Nodes.Remove(newNode);
+                ((TreeView)sender).Nodes.Remove(destinationNode);
+                ((TreeView)sender).Nodes.Insert(indexDestination, newNode);
+                ((TreeView)sender).Nodes.Insert(indexNewNode, destinationNode);
             }
         }
     }
