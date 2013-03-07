@@ -226,6 +226,9 @@ namespace Marathon
         /// <exception cref="System.ArgumentException">Nodes must be from the same treeview</exception>
         private void swapNodes(TreeNode from, TreeNode to)
         {
+            if (from.Parent is TreeNode)
+                return;
+
             if (to != null)
             {
                 if (from.TreeView != to.TreeView)
