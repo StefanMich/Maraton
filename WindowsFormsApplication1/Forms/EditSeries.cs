@@ -201,23 +201,62 @@ namespace Marathon
 
         private void tvEditor_DragDrop(object sender, DragEventArgs e)
         {
-            TreeNode newNode;
+            TreeNode dragNode;
 
             if(e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
             {
                 Point p = ((TreeView)sender).PointToClient(new Point(e.X,e.Y));
                 TreeNode destinationNode = ((TreeView)sender).GetNodeAt(p);
-                newNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
-                //if(destinationNode.TreeView != newNode.TreeView)
-                
-                
-                int indexDestination = ((TreeView)sender).Nodes.IndexOf(destinationNode);
-                int indexNewNode = ((TreeView)sender).Nodes.IndexOf(newNode);
-                ((TreeView)sender).Nodes.Remove(newNode);
-                ((TreeView)sender).Nodes.Remove(destinationNode);
-                ((TreeView)sender).Nodes.Insert(indexDestination, newNode);
-                ((TreeView)sender).Nodes.Insert(indexNewNode, destinationNode);
+                dragNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
+                TreeView t = ((TreeView)sender);
+
+                swapNodes(dragNode, destinationNode);
+
+                t.SelectedNode = dragNode;
             }
+
+            
         }
+
+        /// <summary>
+        /// Swaps the nodes in the treeview. Both nodes must be in the same treeview
+        /// </summary>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        /// <exception cref="System.ArgumentException">Nodes must be from the same treeview</exception>
+        private void swapNodes(TreeNode from, TreeNode to)
+        {
+            if (to != null)
+            {
+                if (from.TreeView != to.TreeView)
+                    throw new ArgumentException("Nodes must be from the same treeview");
+                int indexA = from.Index;
+                int indexB = to.Index;
+                TreeView t = from.TreeView;
+
+                t.Nodes.Remove(from);
+                t.Nodes.Remove(to);
+
+                if (indexA < indexB)
+                {
+                    t.Nodes.Insert(indexA, to);
+                    t.Nodes.Insert(indexB, from);
+                }
+                else if (indexA > indexB)
+                {
+                    t.Nodes.Insert(indexB, from);
+                    t.Nodes.Insert(indexA, to);
+                }
+            }
+            else 
+            {
+                TreeView t = from.TreeView;
+                t.Nodes.Remove(from);
+                t.Nodes.Add(from);
+
+            }
+           
+        }
+
     }
 }
