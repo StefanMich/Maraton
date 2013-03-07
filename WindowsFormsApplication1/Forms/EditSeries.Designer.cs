@@ -37,12 +37,12 @@
             this.btnChangePoster = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tvEditor = new System.Windows.Forms.TreeView();
-            this.btnAddSeason = new System.Windows.Forms.Button();
-            this.btnDeleteSeries = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddSeason = new System.Windows.Forms.Button();
+            this.btnDeleteSeries = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -168,13 +168,39 @@
             // 
             // tvEditor
             // 
+            this.tvEditor.AllowDrop = true;
             this.tvEditor.ContextMenuStrip = this.contextMenuStrip1;
             this.tvEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvEditor.Location = new System.Drawing.Point(0, 0);
             this.tvEditor.Name = "tvEditor";
             this.tvEditor.Size = new System.Drawing.Size(310, 218);
             this.tvEditor.TabIndex = 0;
+            this.tvEditor.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvEditor_ItemDrag);
+            this.tvEditor.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvEditor_DragDrop);
+            this.tvEditor.DragEnter += new System.Windows.Forms.DragEventHandler(this.tvEditor_DragEnter);
             this.tvEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tvEditor_KeyUp);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFileToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(116, 48);
+            // 
+            // addFileToolStripMenuItem
+            // 
+            this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addFileToolStripMenuItem.Text = "Add file";
+            this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // btnAddSeason
             // 
@@ -205,28 +231,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addFileToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(116, 48);
-            // 
-            // addFileToolStripMenuItem
-            // 
-            this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.addFileToolStripMenuItem.Text = "Add file";
-            this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // EditSeries
             // 
