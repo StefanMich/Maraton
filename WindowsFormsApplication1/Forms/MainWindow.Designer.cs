@@ -102,6 +102,7 @@
             // 
             // MainWindow
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 403);
@@ -109,6 +110,8 @@
             this.Name = "MainWindow";
             this.Text = "Maraton";
             this.Load += new System.EventHandler(this.GUI_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.seriesOverview1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.seriesOverview1_DragEnter);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.seriesOverview1_KeyUp);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

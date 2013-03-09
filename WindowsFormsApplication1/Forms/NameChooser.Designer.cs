@@ -43,7 +43,7 @@
             this.lbResults.FormattingEnabled = true;
             this.lbResults.Location = new System.Drawing.Point(12, 12);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(203, 212);
+            this.lbResults.Size = new System.Drawing.Size(203, 251);
             this.lbResults.TabIndex = 0;
             // 
             // btnOK

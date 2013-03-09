@@ -154,7 +154,7 @@ namespace Marathon
         }
 
         private void seriesOverview1_DragEnter(object sender, DragEventArgs e)
-        {
+        {   
             if(e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
             else e.Effect = DragDropEffects.None;
@@ -164,7 +164,8 @@ namespace Marathon
         {
             string[] Folder = (string[])e.Data.GetData(DataFormats.FileDrop,false);
 
-            manager.AddSeries(Folder[0]);
+            manager.CurrentSeries = manager.AddSeries(Folder[0]);
+            seriesOverview1.Select();
         }
     }
 }
