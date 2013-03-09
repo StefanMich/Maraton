@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tcTitle = new Marathon.TitleControl();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.pbPoster = new System.Windows.Forms.PictureBox();
@@ -43,6 +42,7 @@
             this.btnAddSeason = new System.Windows.Forms.Button();
             this.btnDeleteSeries = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.tcTitle = new Marathon.TitleControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,14 +80,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(507, 333);
             this.splitContainer1.SplitterDistance = 77;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // tcTitle
-            // 
-            this.tcTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcTitle.Location = new System.Drawing.Point(0, 0);
-            this.tcTitle.Name = "tcTitle";
-            this.tcTitle.Size = new System.Drawing.Size(507, 77);
-            this.tcTitle.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -137,6 +129,7 @@
             // 
             // btnChangePoster
             // 
+            this.btnChangePoster.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnChangePoster.Location = new System.Drawing.Point(2, 2);
             this.btnChangePoster.Name = "btnChangePoster";
             this.btnChangePoster.Size = new System.Drawing.Size(172, 23);
@@ -191,19 +184,20 @@
             // addFileToolStripMenuItem
             // 
             this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.addFileToolStripMenuItem.Text = "Add file";
             this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // btnAddSeason
             // 
+            this.btnAddSeason.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAddSeason.Location = new System.Drawing.Point(151, 2);
             this.btnAddSeason.Name = "btnAddSeason";
             this.btnAddSeason.Size = new System.Drawing.Size(75, 23);
@@ -214,6 +208,7 @@
             // 
             // btnDeleteSeries
             // 
+            this.btnDeleteSeries.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDeleteSeries.Location = new System.Drawing.Point(3, 2);
             this.btnDeleteSeries.Name = "btnDeleteSeries";
             this.btnDeleteSeries.Size = new System.Drawing.Size(89, 23);
@@ -224,6 +219,7 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDelete.Location = new System.Drawing.Point(232, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
@@ -232,12 +228,21 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // tcTitle
+            // 
+            this.tcTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcTitle.Location = new System.Drawing.Point(0, 0);
+            this.tcTitle.Name = "tcTitle";
+            this.tcTitle.Size = new System.Drawing.Size(507, 77);
+            this.tcTitle.TabIndex = 0;
+            // 
             // EditSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 333);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.Name = "EditSeries";
             this.Text = "Edit Series";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditSeries_KeyUp);
