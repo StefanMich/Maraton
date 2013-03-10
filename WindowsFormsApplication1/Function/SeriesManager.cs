@@ -41,7 +41,7 @@ namespace Marathon
         /// The PosterPath
         /// </summary>
         public static string PosterPath = @"Posters\";
-        static List<string> exclude = new List<string>() { "srt", "db", "nfo" };
+        static List<string> exclude = new List<string>() { "srt", "db", "nfo", "txt" };
 
         private LinkedListNode<Series> currentSeries;
         private SeriesCollection series;
