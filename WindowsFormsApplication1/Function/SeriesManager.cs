@@ -55,7 +55,7 @@ namespace Marathon
             get { return recentlyWatched; }
             set { recentlyWatched = value; }
         }
-        
+
         /// <summary>
         /// Gets the <see cref="SeriesCollection"/> of the <see cref="SeriesManager"/>
         /// </summary>
@@ -246,7 +246,7 @@ namespace Marathon
                 if ((Name = getPicture(Name)) == string.Empty)
                     return null; //this is possibly a bad solution. This happens when the users aborts the search for a poster from the series
 
-            Series thisSeries = new Series(Name, Bitmap.FromFile(SeriesManager.PosterPath +  Name));
+            Series thisSeries = new Series(Name, Bitmap.FromFile(SeriesManager.PosterPath + Name));
 
             //find subfolders in path
             Seasons.AddRange(Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly));
@@ -334,7 +334,7 @@ namespace Marathon
             var searchResults = buffer.SearchTitle(title).Results;
             if (searchResults != null && searchResults.Count() != 0)
             {
-                var parsed = searchResults.Where(x=>x.Type == MediaType.TVSeries);
+                var parsed = searchResults.Where(x => x.Type == MediaType.TVSeries);
                 if (parsed.Count() > 1)
                 {
                     NameChooser result = new NameChooser(parsed);
@@ -347,7 +347,7 @@ namespace Marathon
                     else page = null;
                 }
 
-                else if(parsed.Count() == 1)
+                else if (parsed.Count() == 1)
                 {
                     page = buffer.ReadMain(parsed.First().Id);
                 }
@@ -365,7 +365,7 @@ namespace Marathon
                 if (page != null && page.PosterURL.Succes != false)
                 {
                     WebClient web = new WebClient();
-                    web.DownloadFile(page.PosterURL.Data.Address,SeriesManager.PosterPath +  title);
+                    web.DownloadFile(page.PosterURL.Data.Address, SeriesManager.PosterPath + title);
                 }
                 else Properties.Resources.no_photo.Save(SeriesManager.PosterPath + title);
                 Cursor.Current = Cursors.Default;
@@ -457,7 +457,7 @@ namespace Marathon
             {
                 return Series.Last();
             }
-            
+
             /// <summary>
             /// Finds the first node that contains the specified <see cref="Series"/>
             /// </summary>

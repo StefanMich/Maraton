@@ -31,6 +31,13 @@ namespace Marathon
         public SeriesControl()
         {
             InitializeComponent();
+            pbSeriesPicture.Click += new EventHandler(pbSeriesPicture_Click);
+        }
+
+        void pbSeriesPicture_Click(object sender, EventArgs e)
+        {
+            if (PosterClick != null)
+                PosterClick(this, new PosterClickEventArgs(this.series));
         }
 
         /// <summary>
@@ -53,5 +60,48 @@ namespace Marathon
             this.series = series;
             this.pbSeriesPicture.Image = series.Picture;
         }
+
+
+        /// <summary>
+        /// Eventhandler handling the PosterClick event
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="PosterClickEventArgs"/> instance containing the event data.</param>
+        public delegate void PosterClickEventHandler(object sender, PosterClickEventArgs e);
+        /// <summary>
+        /// Occurs when the poster is clicked.
+        /// </summary>
+        public event PosterClickEventHandler PosterClick;
+        
+
+    }
+
+    /// <summary>
+    /// EventArgs for the PosterClick event
+    /// </summary>
+    public class PosterClickEventArgs : EventArgs
+    {
+        private Series posterSeries;
+
+        /// <summary>
+        /// Gets the poster series.
+        /// </summary>
+        /// <value>
+        /// The poster series.
+        /// </value>
+        public Series PosterSeries
+        {
+            get { return posterSeries; }
+            internal set { posterSeries = value; }
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PosterClickEventArgs"/> class.
+        /// </summary>
+        /// <param name="posterSeries">The poster series.</param>
+        public PosterClickEventArgs(Series posterSeries)
+        {
+            this.posterSeries = posterSeries;
+        }
+        
     }
 }

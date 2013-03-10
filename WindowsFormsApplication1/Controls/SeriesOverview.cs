@@ -30,13 +30,20 @@ namespace Marathon
             p2 = new SeriesControl();
             p3 = new SeriesControl();
             p4 = new SeriesControl();
-            //p0.pbSeriesPicture.MouseClick += new MouseEventHandler(p0_MouseClick);
-            //p0.pbSeriesPicture.MouseUp += new MouseEventHandler(p0_MouseUp);
+
+            p0.PosterClick += new SeriesControl.PosterClickEventHandler(OnPosterClick);
+            p1.PosterClick += new SeriesControl.PosterClickEventHandler(OnPosterClick);
+            p2.PosterClick += new SeriesControl.PosterClickEventHandler(OnPosterClick);
+            p3.PosterClick += new SeriesControl.PosterClickEventHandler(OnPosterClick);
+            p4.PosterClick += new SeriesControl.PosterClickEventHandler(OnPosterClick);
+
             setSizes();
             Controls.AddRange(new Control[] { p0, p1, p2, p3, p4 });
             DoubleBuffered = true;
 
         }
+
+        
 
         /// <summary>
         /// Sets the Series to display on the <see cref="TitleControl"/>
@@ -79,6 +86,17 @@ namespace Marathon
             p4.Height = 3 * p4.Width;
             p4.Location = new Point(X[4] * unit, this.Height / 2 - p4.Height / 2);
 
+        }
+
+        /// <summary>
+        /// Occurs when the poster of a seriescontrol is clicked
+        /// </summary>
+        public event SeriesControl.PosterClickEventHandler PosterClick;
+
+        private void OnPosterClick(object sender, PosterClickEventArgs e)
+        {
+            if (PosterClick != null)
+                PosterClick(this, e);
         }
 
         /// <summary>
