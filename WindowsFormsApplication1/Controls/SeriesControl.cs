@@ -61,12 +61,12 @@ namespace Marathon
             this.pbSeriesPicture.Image = series.Picture;
         }
 
-
         /// <summary>
         /// Eventhandler handling the PosterClick event
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="PosterClickEventArgs"/> instance containing the event data.</param>
+
         public delegate void PosterClickEventHandler(object sender, PosterClickEventArgs e);
         /// <summary>
         /// Occurs when the poster is clicked.
@@ -79,6 +79,7 @@ namespace Marathon
     /// <summary>
     /// EventArgs for the PosterClick event
     /// </summary>
+
     public class PosterClickEventArgs : EventArgs
     {
         private Series posterSeries;
@@ -94,6 +95,7 @@ namespace Marathon
             get { return posterSeries; }
             internal set { posterSeries = value; }
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PosterClickEventArgs"/> class.
         /// </summary>
