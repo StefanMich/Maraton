@@ -31,6 +31,13 @@ namespace Marathon
         public SeriesControl()
         {
             InitializeComponent();
+            pbSeriesPicture.Click += new EventHandler(pbSeriesPicture_Click);
+        }
+
+        void pbSeriesPicture_Click(object sender, EventArgs e)
+        {
+            if (PosterClick != null)
+                PosterClick(this, new PosterClickEventArgs(this.series));
         }
 
         /// <summary>
@@ -53,5 +60,36 @@ namespace Marathon
             this.series = series;
             this.pbSeriesPicture.Image = series.Picture;
         }
+
+
+        public delegate void PosterClickEventHandler(object sender, PosterClickEventArgs e);
+        /// <summary>
+        /// Occurs when the poster is clicked.
+        /// </summary>
+        public event PosterClickEventHandler PosterClick;
+        
+
+    }
+
+    public class PosterClickEventArgs : EventArgs
+    {
+        private Series posterSeries;
+
+        /// <summary>
+        /// Gets the poster series.
+        /// </summary>
+        /// <value>
+        /// The poster series.
+        /// </value>
+        public Series PosterSeries
+        {
+            get { return posterSeries; }
+            internal set { posterSeries = value; }
+        }
+        public PosterClickEventArgs(Series posterSeries)
+        {
+            this.posterSeries = posterSeries;
+        }
+        
     }
 }

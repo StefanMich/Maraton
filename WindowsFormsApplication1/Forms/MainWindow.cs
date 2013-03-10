@@ -25,6 +25,7 @@ namespace Marathon
         public MainWindow()
         {
             InitializeComponent();
+            seriesOverview1.PosterClick += new SeriesControl.PosterClickEventHandler(seriesOverview1_PosterClick);
 
 
 #if DEBUG
@@ -73,6 +74,16 @@ namespace Marathon
             setToCurrent();
            
 #endif
+        }
+
+        void seriesOverview1_PosterClick(object sender, PosterClickEventArgs e)
+        {
+            manager.CurrentSeries = manager.Series.Find(e.PosterSeries);
+        }
+
+        void seriesOverview1_PosterClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("wat");
         }
 
         void manager_CurrentSeriesChanged(object sender, EventArgs e)
