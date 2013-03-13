@@ -80,8 +80,6 @@ namespace Marathon
         public SeriesManager(SerializationInfo info, StreamingContext ctxt)
         {
             this.series = (SeriesCollection)info.GetValue("Series", typeof(SeriesCollection));
-            this.currentSeries = series.Find((Series)info.GetValue("CurrentSeries", typeof(Series)));
-            this.recentlyWatched = (Series)info.GetValue("RecentlyWatched", typeof(Series));
         }
 
         /// <summary>
@@ -381,10 +379,7 @@ namespace Marathon
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (this.currentSeries != null)
-                info.AddValue("CurrentSeries", this.currentSeries.Value);
             info.AddValue("Series", this.series);
-            info.AddValue("RecentlyWatched", this.recentlyWatched);
         }
         /// <summary>
         /// Contains a collection of <see cref="Series"/>
@@ -466,6 +461,14 @@ namespace Marathon
             public LinkedListNode<Series> Find(Series series)
             {
                 return Series.Find(series);
+            }
+
+
+
+            public LinkedListNode<Series> FindName(string name)
+            {
+                LinkedListNode<Series> a = Series.Find(Series.Where(x => x.Name == name).FirstOrDefault());
+                return a;
             }
 
             /// <summary>
