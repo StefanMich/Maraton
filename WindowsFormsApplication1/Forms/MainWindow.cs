@@ -113,12 +113,11 @@ namespace Marathon
                 Previous();
             else if (e.KeyCode == Keys.Right)
                 Next();
-            else if (e.KeyCode == Keys.Enter)
+            else if (e.KeyCode == Keys.P)
                 manager.PlayCurrent();
-            else if (e.KeyCode == Keys.R)
+            else if (e.KeyCode == Keys.A)
             {
-                manager.CurrentSeries = manager.Series.Find(manager.RecentlyWatched);
-                setToCurrent();
+                AddSeries();
             }
             else if (e.KeyCode == Keys.Space)
             {
@@ -137,13 +136,18 @@ namespace Marathon
 
         private void AddSeries_MouseClick(object sender, MouseEventArgs e)
         {
-            pictureBox1.Focus();
+            AddSeries();
+        }
+
+        private void AddSeries()
+        {
+            //pictureBox1.Focus();
 
             if (fbdBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 manager.CurrentSeries = manager.AddSeries(fbdBrowse.SelectedPath);
             }
-            seriesOverview1.Select();
+            titleControl1.Select();
         }
 
         private void setToCurrent()
@@ -165,15 +169,15 @@ namespace Marathon
         }
 
         private void seriesOverview1_DragEnter(object sender, DragEventArgs e)
-        {   
-            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
             else e.Effect = DragDropEffects.None;
         }
 
         private void seriesOverview1_DragDrop(object sender, DragEventArgs e)
         {
-            string[] Folder = (string[])e.Data.GetData(DataFormats.FileDrop,false);
+            string[] Folder = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             manager.CurrentSeries = manager.AddSeries(Folder[0]);
             seriesOverview1.Select();

@@ -45,16 +45,6 @@ namespace Marathon
 
         private LinkedListNode<Series> currentSeries;
         private SeriesCollection series;
-        private Series recentlyWatched;
-
-        /// <summary>
-        /// Sets or gets the most recently watched series
-        /// </summary>
-        public Series RecentlyWatched
-        {
-            get { return recentlyWatched; }
-            set { recentlyWatched = value; }
-        }
 
         /// <summary>
         /// Gets the <see cref="SeriesCollection"/> of the <see cref="SeriesManager"/>
@@ -461,14 +451,6 @@ namespace Marathon
             public LinkedListNode<Series> Find(Series series)
             {
                 return Series.Find(series);
-            }
-
-
-
-            public LinkedListNode<Series> FindName(string name)
-            {
-                LinkedListNode<Series> a = Series.Find(Series.Where(x => x.Name == name).FirstOrDefault());
-                return a;
             }
 
             /// <summary>
