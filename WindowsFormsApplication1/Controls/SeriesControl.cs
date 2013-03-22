@@ -56,7 +56,7 @@ namespace Marathon
         /// </summary>
         /// <param name="series">The <see cref="Series"/> to display</param>
         public void setSeries(Series series)
-        {
+        { 
             this.series = series;
             this.pbSeriesPicture.Image = series.Picture;
         }

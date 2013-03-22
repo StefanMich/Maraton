@@ -65,12 +65,18 @@ namespace Marathon
             OpenFileDialog fbd = new OpenFileDialog();
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                series.Picture.Dispose();
-                pbPoster.Image.Dispose();
-                File.Replace(fbd.FileName, series.Name, fbd.FileName + ".bak");
-                series.Picture = Bitmap.FromFile(series.Name);
-                pbPoster.Image = series.Picture;
-                //TODO crasher nogle gange (ved skift af billede flere gange?)
+                try
+                {
+                    series.Picture.Dispose();
+                    pbPoster.Image.Dispose();
+                    File.Replace(fbd.FileName, SeriesManager.PosterPath + series.Name, fbd.FileName + ".bak");
+                    series.Picture = Bitmap.FromFile(SeriesManager.PosterPath + series.Name);
+                    pbPoster.Image = series.Picture;
+                }
+                catch (IOException )
+                {
+                    series.Picture = Bitmap.FromFile(SeriesManager.PosterPath + series.Name);
+                }
             }
 
         }
