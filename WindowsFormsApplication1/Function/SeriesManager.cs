@@ -358,6 +358,13 @@ namespace Marathon
                 else Properties.Resources.no_photo.Save(SeriesManager.PosterPath + title);
                 Cursor.Current = Cursors.Default;
             }
+            else
+            {
+                EditSearch edit = new EditSearch(title);
+                if (edit.ShowDialog() == DialogResult.OK)
+                    return getPicture(edit.EditedTitle);
+                else return string.Empty;
+            }
             return title;
 
         }

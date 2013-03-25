@@ -113,7 +113,7 @@ namespace Marathon
                 Previous();
             else if (e.KeyCode == Keys.Right)
                 Next();
-            else if (e.KeyCode == Keys.P)
+            else if (e.KeyCode == Keys.S)
                 manager.PlayCurrent();
             else if (e.KeyCode == Keys.A)
             {
