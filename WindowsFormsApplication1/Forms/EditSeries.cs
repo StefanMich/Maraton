@@ -77,6 +77,7 @@ namespace Marathon
                 {
                     series.Picture = Bitmap.FromFile(SeriesManager.PosterPath + series.Name);
                 }
+                DialogResult = DialogResult.None;
             }
 
         }
@@ -104,6 +105,7 @@ namespace Marathon
                 }
 
             }
+            DialogResult = System.Windows.Forms.DialogResult.None;
         }
 
         private void btnDeleteSeries_Click(object sender, EventArgs e)
@@ -120,6 +122,7 @@ namespace Marathon
                 populateTreeView(series);
 
             }
+            DialogResult = DialogResult.None;
         }
 
         private void EditSeries_KeyUp(object sender, KeyEventArgs e)

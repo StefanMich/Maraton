@@ -17,7 +17,7 @@ namespace Marathon
         /// <returns></returns>
         public static LinkedListNode<Series> NextOrFirst(this LinkedListNode<Series> current)
         {
-            if (current != null)
+            if (current != null && current.List !=null)
             {
                 if (current.Next == null)
                     return current.List.First;

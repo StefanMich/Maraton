@@ -81,11 +81,6 @@ namespace Marathon
             manager.CurrentSeries = manager.Series.Find(e.PosterSeries);
         }
 
-        void seriesOverview1_PosterClick(object sender, EventArgs e)
-        {
-            MessageBox.Show("wat");
-        }
-
         void manager_CurrentSeriesChanged(object sender, EventArgs e)
         {
             setToCurrent();
@@ -109,17 +104,17 @@ namespace Marathon
 
         private void seriesOverview1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left && manager.CurrentSeries != null)
                 Previous();
-            else if (e.KeyCode == Keys.Right)
+            else if (e.KeyCode == Keys.Right && manager.CurrentSeries != null)
                 Next();
-            else if (e.KeyCode == Keys.S)
+            else if (e.KeyCode == Keys.S && manager.CurrentSeries != null)
                 manager.PlayCurrent();
             else if (e.KeyCode == Keys.A)
             {
                 AddSeries();
             }
-            else if (e.KeyCode == Keys.Space)
+            else if (e.KeyCode == Keys.Space && manager.CurrentSeries != null)
             {
                 EditSeries es = new EditSeries(manager.CurrentSeries.Value, manager);
                 es.ShowDialog();

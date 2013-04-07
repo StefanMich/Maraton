@@ -152,8 +152,9 @@ namespace Marathon
 
             if (CurrentSeries.Value.Seasons.Count() == 0)
             {
-                currentSeries = NextSeries;
-                series.Remove(CurrentSeries.Value);
+                //currentSeries = series.Count() == 1 ? null : NextSeries;
+//                series.Remove(CurrentSeries.Value);
+                RemoveSeries(CurrentSeries.Value);
             }
 
             SaveLoad.SaveManager(this, "data.lawl");
