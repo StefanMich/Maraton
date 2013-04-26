@@ -211,7 +211,7 @@ namespace Marathon
         private void tvEditor_DragDrop(object sender, DragEventArgs e)
         {
             TreeNode dragNode;
-
+            
             if(e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
             {
                 Point p = ((TreeView)sender).PointToClient(new Point(e.X,e.Y));
@@ -223,7 +223,7 @@ namespace Marathon
 
                 t.SelectedNode = dragNode;
             }
-
+            
             
         }
 
@@ -242,22 +242,33 @@ namespace Marathon
             {
                 if (from.TreeView != to.TreeView)
                     throw new ArgumentException("Nodes must be from the same treeview");
+
+                Season sA = series.Seasons.Where(x => x.Title == from.Text).First();
+                Season sB = series.Seasons.Where(x => x.Title == to.Text).First();
+
                 int indexA = from.Index;
                 int indexB = to.Index;
                 TreeView t = from.TreeView;
 
+
                 t.Nodes.Remove(from);
+                series.Seasons.Remove(sA);
                 t.Nodes.Remove(to);
+                series.Seasons.Remove(sB);
 
                 if (indexA < indexB)
                 {
                     t.Nodes.Insert(indexA, to);
+                    series.Seasons.Insert(indexA, sB);
                     t.Nodes.Insert(indexB, from);
+                    series.Seasons.Insert(indexB, sA);
                 }
                 else if (indexA > indexB)
                 {
                     t.Nodes.Insert(indexB, from);
+                    series.Seasons.Insert(indexB, sA);
                     t.Nodes.Insert(indexA, to);
+                    series.Seasons.Insert(indexA, sB);
                 }
             }
             else 
