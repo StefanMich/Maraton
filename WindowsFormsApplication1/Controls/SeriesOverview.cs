@@ -110,10 +110,5 @@ namespace Marathon
             this.Focus();
         }
 
-        private void SeriesOverview_MouseClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show("h");
-        }
-
     }
 }
