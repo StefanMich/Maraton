@@ -43,8 +43,6 @@ namespace Marathon
 
         }
 
-        
-
         /// <summary>
         /// Sets the Series to display on the <see cref="TitleControl"/>
         /// </summary>
@@ -111,5 +109,11 @@ namespace Marathon
             this.Invalidate();
             this.Focus();
         }
+
+        private void SeriesOverview_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("h");
+        }
+
     }
 }

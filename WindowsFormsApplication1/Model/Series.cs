@@ -211,6 +211,16 @@ namespace Marathon
             }
 
             /// <summary>
+            /// Inserts the season at the specified index.
+            /// </summary>
+            /// <param name="index">The index.</param>
+            /// <param name="season">The season.</param>
+            public void Insert(int index, Season season)
+            {
+                seasons.Insert(index, season);
+            }
+
+            /// <summary>
             /// Adds the data of the <see cref="SeasonsCollection"/> to the <see cref="SerializationInfo"/> object
             /// </summary>
             /// <param name="info"></param>

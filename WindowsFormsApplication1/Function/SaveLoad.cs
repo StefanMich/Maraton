@@ -10,9 +10,18 @@ using System.Xml.Linq;
 
 namespace Marathon
 {
-    class SaveLoad
+
+    /// <summary>
+    /// Class saving and loading the data file
+    /// </summary>
+    public class SaveLoad
     {
 
+        /// <summary>
+        /// Loads the manager.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <returns></returns>
         public static SeriesManager LoadManager(string filename)
         {
             using (Stream file = File.Open(filename, FileMode.Open))
@@ -24,6 +33,10 @@ namespace Marathon
             }
         }
 
+        /// <summary>
+        /// Called when the main application loads
+        /// </summary>
+        /// <returns></returns>
         public static SeriesManager OnLoad()
         {
 
@@ -54,6 +67,11 @@ namespace Marathon
 
         }
 
+        /// <summary>
+        /// Saves the manager.
+        /// </summary>
+        /// <param name="manager">The manager.</param>
+        /// <param name="filename">The filename.</param>
         public static void SaveManager(SeriesManager manager, string filename)
         {
             using (Stream file = File.Open(filename, FileMode.Create))
@@ -63,6 +81,11 @@ namespace Marathon
             }
         }
 
+        /// <summary>
+        /// Creates a new list
+        /// </summary>
+        /// <param name="manager">The manager.</param>
+        /// <param name="currentFile">The current file.</param>
         public void NewList(SeriesManager manager, ref string currentFile)
         {
             Filename file = new Filename();
@@ -72,6 +95,12 @@ namespace Marathon
             SaveList(manager, currentFile);
         }
 
+        /// <summary>
+        /// Saves the list.
+        /// </summary>
+        /// <param name="manager">The manager.</param>
+        /// <param name="filename">The filename.</param>
+        /// <exception cref="System.ArgumentException">Empty filename</exception>
         public static void SaveList(SeriesManager manager, string filename)
         {
             if (filename.Length == 0)

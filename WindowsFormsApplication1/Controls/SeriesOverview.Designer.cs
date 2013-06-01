@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SeriesOverview";
             this.Size = new System.Drawing.Size(600, 300);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SeriesOverview_MouseClick);
             this.ResumeLayout(false);
 
         }

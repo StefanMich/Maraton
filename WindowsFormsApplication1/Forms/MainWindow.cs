@@ -26,54 +26,6 @@ namespace Marathon
         {
             InitializeComponent();
             seriesOverview1.PosterClick += new SeriesControl.PosterClickEventHandler(seriesOverview1_PosterClick);
-
-
-#if DEBUG
-            
-            #region testdata
-            /*
-            Series test = new Series("HIMYM", Properties.Resources.himym);
-            Season s1 = new Season("s1", test);
-            Season s2 = new Season("s2", test);
-            s1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E1"));
-            s1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E2"));
-            s1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E3"));
-            s2.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S2E1"));
-            s2.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S2E2"));
-            s2.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S2E3"));
-            test.Seasons.Enqueue(s1);
-            test.Seasons.Enqueue(s2);
-            Manager.Series.Add(test);
-
-            Series test2 = new Series("BBT", Properties.Resources.bbt);
-            Season bs1 = new Season("s1", test2);
-            Season bs2 = new Season("s2", test2);
-            bs1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E1"));
-            bs1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E2"));
-            bs1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E3"));
-            bs2.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S2E1"));
-            test2.Seasons.Enqueue(bs1);
-            test2.Seasons.Enqueue(bs2);
-            Manager.Series.Add(test2);
-
-            Series test3 = new Series("Modern Family", Properties.Resources.modern);
-            Season ms1 = new Season("s1", test3);
-            ms1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E1"));
-            ms1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E2"));
-            ms1.EpisodeCollection.Enqueue(new Stufkan.IO.Episode(null, "S1E3"));
-            test3.Seasons.Enqueue(ms1);
-            Manager.Series.Add(test3);
-
-            setToCurrent();
-            */
-            #endregion
-
-            Manager.AddSeries(@"C:\Testfilm\30 Rock");
-            Manager.AddSeries(@"C:\Testfilm\Big Bang Theory");
-            Manager.AddSeries(@"C:\Testfilm\How i met your mother");
-            setToCurrent();
-           
-#endif
         }
 
         void seriesOverview1_PosterClick(object sender, PosterClickEventArgs e)
@@ -136,13 +88,11 @@ namespace Marathon
 
         private void AddSeries()
         {
-            //pictureBox1.Focus();
 
             if (fbdBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 manager.CurrentSeries = manager.AddSeries(fbdBrowse.SelectedPath);
             }
-            titleControl1.Select();
         }
 
         private void setToCurrent()
@@ -159,7 +109,6 @@ namespace Marathon
             if ((manager = SaveLoad.OnLoad()) != null)
                 setToCurrent();
             else manager = new SeriesManager();
-            //config.OnLoad();
             manager.CurrentSeriesChanged += new SeriesManager.CurrentSeriesChangedHandler(manager_CurrentSeriesChanged);
         }
 
@@ -177,5 +126,6 @@ namespace Marathon
             manager.CurrentSeries = manager.AddSeries(Folder[0]);
             seriesOverview1.Select();
         }
+
     }
 }
