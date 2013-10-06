@@ -40,7 +40,7 @@
             // 
             this.lTitle.AutoSize = true;
             this.lTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lTitle.Location = new System.Drawing.Point(268, 0);
+            this.lTitle.Location = new System.Drawing.Point(260, 0);
             this.lTitle.Name = "lTitle";
             this.lTitle.Size = new System.Drawing.Size(66, 31);
             this.lTitle.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             this.lSeasons.AutoSize = true;
             this.lSeasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lSeasons.Location = new System.Drawing.Point(262, 31);
+            this.lSeasons.Location = new System.Drawing.Point(254, 31);
             this.lSeasons.Name = "lSeasons";
             this.lSeasons.Size = new System.Drawing.Size(72, 20);
             this.lSeasons.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             this.lEpisodes.AutoSize = true;
             this.lEpisodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lEpisodes.Location = new System.Drawing.Point(262, 51);
+            this.lEpisodes.Location = new System.Drawing.Point(254, 51);
             this.lEpisodes.Name = "lEpisodes";
             this.lEpisodes.Size = new System.Drawing.Size(75, 20);
             this.lEpisodes.TabIndex = 2;
@@ -74,7 +74,7 @@
             this.Controls.Add(this.lSeasons);
             this.Controls.Add(this.lTitle);
             this.Name = "TitleControl";
-            this.Size = new System.Drawing.Size(622, 79);
+            this.Size = new System.Drawing.Size(589, 79);
             this.ResumeLayout(false);
             this.PerformLayout();
 

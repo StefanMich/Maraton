@@ -25,6 +25,7 @@ namespace Marathon
         public MainWindow()
         {
             InitializeComponent();
+            
             seriesOverview1.PosterClick += new SeriesControl.PosterClickEventHandler(seriesOverview1_PosterClick);
         }
 
@@ -61,7 +62,11 @@ namespace Marathon
             else if (e.KeyCode == Keys.Right && manager.CurrentSeries != null)
                 Next();
             else if (e.KeyCode == Keys.S && manager.CurrentSeries != null)
+            {
                 manager.PlayCurrent();
+                titleControl1.RefreshText();
+
+            }
             else if (e.KeyCode == Keys.A)
             {
                 AddSeries();
@@ -110,6 +115,9 @@ namespace Marathon
                 setToCurrent();
             else manager = new SeriesManager();
             manager.CurrentSeriesChanged += new SeriesManager.CurrentSeriesChangedHandler(manager_CurrentSeriesChanged);
+
+            if (manager.Series.Count() != 0)
+                titleControl1.SetText(manager.CurrentSeries.Value);
         }
 
         private void seriesOverview1_DragEnter(object sender, DragEventArgs e)

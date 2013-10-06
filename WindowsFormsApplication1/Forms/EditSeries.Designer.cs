@@ -42,7 +42,7 @@
             this.btnAddSeason = new System.Windows.Forms.Button();
             this.btnDeleteSeries = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.tcTitle = new Marathon.TitleControl();
+            this.titleControl1 = new Marathon.TitleControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,7 +72,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.tcTitle);
+            this.splitContainer1.Panel1.Controls.Add(this.titleControl1);
             // 
             // splitContainer1.Panel2
             // 
@@ -228,13 +228,13 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // tcTitle
+            // titleControl1
             // 
-            this.tcTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcTitle.Location = new System.Drawing.Point(0, 0);
-            this.tcTitle.Name = "tcTitle";
-            this.tcTitle.Size = new System.Drawing.Size(507, 77);
-            this.tcTitle.TabIndex = 0;
+            this.titleControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.titleControl1.Location = new System.Drawing.Point(0, 0);
+            this.titleControl1.Name = "titleControl1";
+            this.titleControl1.Size = new System.Drawing.Size(507, 77);
+            this.titleControl1.TabIndex = 0;
             // 
             // EditSeries
             // 
@@ -271,7 +271,6 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private TitleControl tcTitle;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PictureBox pbPoster;
         private System.Windows.Forms.TreeView tvEditor;
@@ -284,5 +283,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem addFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private TitleControl titleControl1;
     }
 }

@@ -46,8 +46,7 @@ namespace MarathonXNA
             else manager = new SeriesManager();
             //manager.CurrentSeriesChanged += new SeriesManager.CurrentSeriesChangedHandler(manager_CurrentSeriesChanged);
 
-            //this.Content.Load
-            Texture2D.FromStream(GraphicsDevice, manager.CurrentSeries.Value.Picture);
+
         }
 
         /// <summary>

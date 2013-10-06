@@ -40,7 +40,7 @@ namespace Marathon
             this.series = series;
             this.manager = manager;
 
-            tcTitle.SetText(series);
+            titleControl1.SetText(series);
             pbPoster.Image = series.Picture;
             populateTreeView(series);
             fbd = new FolderBrowserDialog();
@@ -73,7 +73,7 @@ namespace Marathon
                     series.Picture = Bitmap.FromFile(SeriesManager.PosterPath + series.Name);
                     pbPoster.Image = series.Picture;
                 }
-                catch (IOException )
+                catch (IOException)
                 {
                     series.Picture = Bitmap.FromFile(SeriesManager.PosterPath + series.Name);
                 }
@@ -106,6 +106,8 @@ namespace Marathon
 
             }
             DialogResult = System.Windows.Forms.DialogResult.None;
+
+            titleControl1.RefreshText();
         }
 
         private void btnDeleteSeries_Click(object sender, EventArgs e)
@@ -177,7 +179,8 @@ namespace Marathon
             if (tvEditor.SelectedNode != null)
             {
                 if (e.KeyCode == Keys.Delete)
-                    deleteSelectedNode();
+                deleteSelectedNode(); 
+                    
 
                 else if (e.KeyCode == Keys.Enter)
                 {
@@ -195,7 +198,9 @@ namespace Marathon
                         tvEditor.SelectedNode.Remove();
                     }
                 }
+
             }
+            titleControl1.RefreshText();
         }
 
         private void tvEditor_ItemDrag(object sender, ItemDragEventArgs e)
@@ -211,10 +216,10 @@ namespace Marathon
         private void tvEditor_DragDrop(object sender, DragEventArgs e)
         {
             TreeNode dragNode;
-            
-            if(e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
+
+            if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
             {
-                Point p = ((TreeView)sender).PointToClient(new Point(e.X,e.Y));
+                Point p = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
                 TreeNode destinationNode = ((TreeView)sender).GetNodeAt(p);
                 dragNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
                 TreeView t = ((TreeView)sender);
@@ -223,8 +228,8 @@ namespace Marathon
 
                 t.SelectedNode = dragNode;
             }
-            
-            
+
+
         }
 
         /// <summary>
@@ -271,14 +276,14 @@ namespace Marathon
                     series.Seasons.Insert(indexA, sB);
                 }
             }
-            else 
+            else
             {
                 TreeView t = from.TreeView;
                 t.Nodes.Remove(from);
                 t.Nodes.Add(from);
 
             }
-           
+
         }
 
     }

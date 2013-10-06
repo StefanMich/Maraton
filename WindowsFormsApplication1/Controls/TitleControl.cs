@@ -13,17 +13,20 @@ namespace Marathon
     {
         private Series series;
 
-        /// <summary>
-        /// Instantiates a <see cref="TitleControl"/> with a default text
-        /// </summary>
         public TitleControl()
         {
             InitializeComponent();
-            this.series = new Series("Add series with the button on the left", null);
         }
 
-       
-        
+        /// <summary>
+        /// Instantiates a <see cref="TitleControl"/> with a default text
+        /// </summary>
+        public TitleControl(Series series):this()
+        {
+            this.series = series;
+            if (series == null)
+                this.series = new Series("Add series with the button on the left", null);
+        }
 
         /// <summary>
         /// Sets the content of the <see cref="TitleControl"/> to the content of the <see cref="Series"/>
@@ -31,6 +34,7 @@ namespace Marathon
         /// <param name="series"></param>
         public void SetText(Series series)
         {
+            this.series = series;
             if (series != null)
             {
 
@@ -43,6 +47,12 @@ namespace Marathon
                 lEpisodes.Text = series.NumberOfEpisodes() + " episode" + (series.NumberOfEpisodes() > 1 ? "s" : "");
                 lEpisodes.Location = new Point(this.Width / 2 - lEpisodes.Width / 2, lEpisodes.Location.Y);
             }
+        }
+
+
+        public void RefreshText()
+        {
+            SetText(this.series);
         }
 
         /// <summary>

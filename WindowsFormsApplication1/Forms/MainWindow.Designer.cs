@@ -30,7 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.titleControl1 = new Marathon.TitleControl();
+            this.titleControl1 = new Marathon.TitleControl(null);
             this.seriesOverview1 = new Marathon.SeriesOverview();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
