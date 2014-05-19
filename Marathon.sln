@@ -1,11 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marathize", "WindowsFormsApplication1\Marathize.csproj", "{90E8811E-01EB-4DB1-A2FA-66FDD3946DE6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarathonXNA", "MarathonXNA\MarathonXNA\MarathonXNA.csproj", "{72D1DE7A-F5DE-4BA1-BB04-3C7ACD828E0D}"
-EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MarathonXNAContent", "MarathonXNA\MarathonXNAContent\MarathonXNAContent.contentproj", "{822AF305-A34D-4B73-8CF4-800B5743AC80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +15,6 @@ Global
 		{90E8811E-01EB-4DB1-A2FA-66FDD3946DE6}.Debug|x86.Build.0 = Debug|x86
 		{90E8811E-01EB-4DB1-A2FA-66FDD3946DE6}.Release|x86.ActiveCfg = Release|x86
 		{90E8811E-01EB-4DB1-A2FA-66FDD3946DE6}.Release|x86.Build.0 = Release|x86
-		{72D1DE7A-F5DE-4BA1-BB04-3C7ACD828E0D}.Debug|x86.ActiveCfg = Debug|x86
-		{72D1DE7A-F5DE-4BA1-BB04-3C7ACD828E0D}.Debug|x86.Build.0 = Debug|x86
-		{72D1DE7A-F5DE-4BA1-BB04-3C7ACD828E0D}.Release|x86.ActiveCfg = Release|x86
-		{72D1DE7A-F5DE-4BA1-BB04-3C7ACD828E0D}.Release|x86.Build.0 = Release|x86
-		{822AF305-A34D-4B73-8CF4-800B5743AC80}.Debug|x86.ActiveCfg = Debug|x86
-		{822AF305-A34D-4B73-8CF4-800B5743AC80}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
